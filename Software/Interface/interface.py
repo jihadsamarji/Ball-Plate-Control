@@ -330,8 +330,8 @@ def startBalance():
             donothing()
 
 
-sommeErreurX = 1
-sommeErreurY = 1
+sommeErrorX = 1
+sommeErrorY = 1
 timeInterval = 1
 alpha, beta, prevAlpha, prevBeta = 0, 0, 0, 0
 omega = 0.2
@@ -339,7 +339,7 @@ omega = 0.2
 
 def PIDcontrol(ballPosX, ballPosY, prevBallPosX, prevBallPosY, consigneX, consigneY):
     global omega
-    global sommeErreurX, sommeErreurY
+    global sommeErrorX, sommeErrorY
     global alpha, beta, prevAlpha, prevBeta
     global startBalanceBall, arduinoIsConnected
 
@@ -347,8 +347,8 @@ def PIDcontrol(ballPosX, ballPosY, prevBallPosX, prevBallPosY, consigneX, consig
     Ki = sliderCoefI.get()
     Kd = sliderCoefD.get()
 
-    Ix = Kp * (consigneX - ballPosX) + Ki * sommeErreurX + Kd * ((prevBallPosX - ballPosX) / 0.0333)
-    Iy = Kp * (consigneY - ballPosY) + Ki * sommeErreurY + Kd * ((prevBallPosY - ballPosY) / 0.0333)
+    Ix = Kp * (consigneX - ballPosX) + Ki * sommeErrorX + Kd * ((prevBallPosX - ballPosX) / 0.0333)
+    Iy = Kp * (consigneY - ballPosY) + Ki * sommeErrorY + Kd * ((prevBallPosY - ballPosY) / 0.0333)
 
     Ix = round(Ix / 10000, 4)
     Iy = round(Iy / 10000, 4)
@@ -412,11 +412,11 @@ def PIDcontrol(ballPosX, ballPosY, prevBallPosX, prevBallPosY, consigneX, consig
         ser.write((str(dataDict[(alpha, beta)]) + "\n").encode())
 
     # print(alpha, beta)
-    print(Ix, Iy, alpha, beta, ballPosX, ballPosY, prevBallPosX, prevBallPosY, sommeErreurX, sommeErreurY)
+    print(Ix, Iy, alpha, beta, ballPosX, ballPosY, prevBallPosX, prevBallPosY, sommeErrorX, sommeErrorY)
 
     if startBalanceBall == True:
-        sommeErreurX += (consigneX - ballPosX)
-        sommeErreurY += (consigneY - ballPosY)
+        sommeErrorX += (consigneX - ballPosX)
+        sommeErrorY += (consigneY - ballPosY)
 
 
 prevX, prevY = 0, 0
@@ -424,23 +424,23 @@ prevConsigneX, prevConsigneY = 0, 0
 start_time = 0
 
 
-def main():
+def main():     # declaring the main function of the program
     start_timeFPS = time.time()
     global H, S, V
     global getPixelColor
     global x, y, alpha, beta
     global prevX, prevY, prevAlpha, prevBeta, prevConsigneX, prevConsigneY
-    global consigneX, consigneY, sommeErreurX, sommeErreurY
+    global consigneX, consigneY, sommeErrorX, sommeErrorY
     global camWidth, camHeight
     global timeInterval, start_time
     global showVideoWindow
 
-    _, img = cam.read()
+    _, img = cam.read()     # capturing the image from the cam object, ignore bool, store it in img
     img = img[0:int(camHeight),
-          int((camWidth - camHeight) / 2):int(camWidth - ((camWidth - camHeight) / 2))]  # [Y1:Y2,X1:X2]
-    imgCircle = np.zeros(img.shape, dtype=np.uint8)
-    cv2.circle(imgCircle, (240, 240), 270, (255, 255, 255), -1, 8, 0)
-    img = img & imgCircle
+          int((camWidth - camHeight) / 2):int(camWidth - ((camWidth - camHeight) / 2))]     # cropping, [Y1:Y2,X1:X2]
+    imgCircle = np.zeros(img.shape, dtype=np.uint8)     # create a black image with same size of img
+    cv2.circle(imgCircle, (240, 240), 270, (255, 255, 255), -1, 8, 0)       # create a white mask
+    img = img & imgCircle       # masking
     imgHSV = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
 
     if getPixelColor == True and mouseY > 0 and mouseY < 480 and mouseX < 480:
@@ -483,7 +483,7 @@ def main():
             PIDcontrol(int(x), int(y), prevX, prevY, consigneX, consigneY)
             start_time = time.time()
     else:
-        sommeErreurX, sommeErreurY = 0, 0
+        sommeErrorX, sommeErrorY = 0, 0
 
     if showVideoWindow == True:
         img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
@@ -495,7 +495,7 @@ def main():
 
     drawWithBall()
     if prevConsigneX != consigneX or prevConsigneY != consigneY:
-        sommeErreurX, sommeErreurY = 0, 0
+        sommeErrorX, sommeErrorY = 0, 0
 
     paintGraph()
     prevX, prevY = int(x), int(y)
@@ -516,20 +516,20 @@ BPositionCalibration = tk.Button(FrameVideoControl, text="Toggle Calibration Vie
 BPositionCalibration.place(x=230, y=-5)
 
 
-sliderH = tk.Scale(FrameVideoControl, from_=0, to=100, orient="horizontal", label="Sensibilité H", length=350,
+sliderH = tk.Scale(FrameVideoControl, from_=0, to=100, orient="horizontal", label="Sensibility H", length=350,
                    tickinterval=10)
 sliderH.set(sliderHDefault)
 sliderH.pack()
-sliderS = tk.Scale(FrameVideoControl, from_=0, to=100, orient="horizontal", label="Sensibilité S", length=350,
+sliderS = tk.Scale(FrameVideoControl, from_=0, to=100, orient="horizontal", label="Sensibility S", length=350,
                    tickinterval=10)
 sliderS.set(sliderSDefault)
 sliderS.pack()
-sliderV = tk.Scale(FrameVideoControl, from_=0, to=100, orient="horizontal", label="Sensibilité V", length=350,
+sliderV = tk.Scale(FrameVideoControl, from_=0, to=100, orient="horizontal", label="Sensibility V", length=350,
                    tickinterval=10)
 sliderV.set(sliderVDefault)
 sliderV.pack()
 
-FrameServosControl = tk.LabelFrame(controllerWindow, text="Servos contrôle")
+FrameServosControl = tk.LabelFrame(controllerWindow, text="Servos Control")
 FrameServosControl.place(x=20, y=315, width=380)
 BAbaissementPlateau = tk.Button(FrameServosControl, text="Ranger les bras", command=rangerPlateau)
 BAbaissementPlateau.pack()
