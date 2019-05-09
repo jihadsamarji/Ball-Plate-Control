@@ -1,0 +1,66 @@
+*****************************************************************
+      SolidWorks Corporation - IGES Processor Status Report
+*****************************************************************
+=================================================================
+General Information
+=================================================================
+Sending System Product I.D.  : Servo Arm HXT900 Micro
+Receiving System Product I.D.: Servo Arm HXT900 Micro
+File Name                    : C:\Users\negleton\Desktop\SolidWorks Files\Printer 4\Servo Arm HXT900 Micro.IGS
+Sending System               : SolidWorks 2013
+Preprocessor Version         : SolidWorks 2013
+File Creation Date           : 140415.141442
+Model Creation Date          : 140415.141442
+Units                        : IN
+Model Space Scale            : 1
+Author                       : negleton
+Organization                 : 
+
+
+=================================================================
+Entity Processing Information
+=================================================================
+
+
+=================================================================
+Precision analysis of IGES file:
+=================================================================
+  Most prevalent number of significant digits:               9
+  Highest number of significant digits:                     11
+  Average number of significant digits:                7.82222
+  Maximum distance to origin:                          39.4886
+  Minimum distance to origin:                         0.133452
+  Effective number of significant digits:              10.9971
+
+
+=================================================================
+Entity Summary
+=================================================================
+-----------------------------------------------------------------
+Type Name                                         Count Converted
+---- ----                                         ----- ---------
+100  Arc                                             88        88
+102  Composite curve                                 88        88
+110  Line                                            98        98
+120  Surface of revolution                           21        21
+124  Transformation matrix                           56        56
+126  Rational B-spline curve                        144       144
+128  Rational B-spline surface                        7         7
+142  Curve on a parametric surface                   44        44
+144  Trimmed parametric surface                      28        28
+314  Color definition                                 1         1
+_________________________________________________________________
+
+
+=================================================================
+Result Summary
+=================================================================
+SolidWorks Feature Type                Count
+-----------------------                -----
+Solid feature(s)                       0
+Surface feature(s)                     28
+Curve/Sketch feature(s)                0
+--------------------------------------------
+Start time: Friday, May 10, 2019 00:11:59
+Finish time: Friday, May 10, 2019 00:12:01
+Processing time: 0 days, 00 hours, 00 mins, 02 secs
