@@ -9,50 +9,50 @@ import serial
 import serial.tools.list_ports
 from math import *
 
-lines = open("data.txt").read().splitlines()
-lines = lines[:-11]  # Remove the last 11 lines
-lines = lines[1:]  # Remove the first line
+lines = open("data.txt").read().splitlines()  # Read the file data.txt and split it by lines and put it in a list
+lines = lines[:-11]  # Remove the last 11 lines ( because they contain descriptions)
+lines = lines[1:]  # Remove the first line ( because it contains the titles )
 
 dataDict = {}
 
 camHeight = 480
 camWidth = 640
-cam = cv2.VideoCapture(0)
+cam = cv2.VideoCapture(0)  # select which cam device ( 0 is the default ) doesn't give a NULL if no device is connected
 cam.set(3, camWidth)    # setting the width of the captured video
 cam.set(4, camHeight)   # setting the height of the captured video
 
-getPixelColor = False
-H, S, V = 0, 0, 0
+getPixelColor = False   # flag to get the pixel color of the ball when needed
+H, S, V = 0, 0, 0   # the color properties of the Pixel to track
 
-mouseX, mouseY = 0, 0
+mouseX, mouseY = 0, 0   # declare variables to capture mouse position for color tracking
 
-for i in range(0, len(lines)):
+for i in range(0, len(lines)):  # for loop to go over the lines list and feed it to the dictionary
     key, value = lines[i].split("#")
     alpha, beta = key.split("|")
     angleA, angleB, angleC = value.split("|")
     dataDict[(float(alpha), float(beta))] = (float(angleA), float(angleB), float(angleC))
 
-controllerWindow = tk.Tk()
-controllerWindow.title("Control Window")
-controllerWindow.geometry("820x500")
-controllerWindow["bg"] = "grey"
-controllerWindow.resizable(0, 0)
+controllerWindow = tk.Tk()  # initializes this tk interpreter and creates the root window
+controllerWindow.title("Control Window")    # define title of the root window
+controllerWindow.geometry("820x500")    # define size of the root window
+controllerWindow["bg"] = "grey"     # define the background color of the root window
+controllerWindow.resizable(0, 0)    # define if the root window is resizable or not for Vertical and horizontal
 
-videoWindow = tk.Toplevel(controllerWindow)
-videoWindow.title("Cam Footage")
+videoWindow = tk.Toplevel(controllerWindow)     # a new window derived from the root window "controllerwindow"
+videoWindow.title("Cam Footage")    # define title of videowindow
 videoWindow.resizable(0, 0)  # Cannot resize the window
-lmain = tk.Label(videoWindow)
-lmain.pack()
+lmain = tk.Label(videoWindow)   #create an empty label widget in the videoWindow
+lmain.pack()    # adjust the size of the videowindow to fit the label lmain
 videoWindow.withdraw()  # hide the window
 
-graphWindow = tk.Toplevel(controllerWindow)
-graphWindow.title("Position in function of time")
-graphWindow.resizable(0, 0)
-graphCanvas = tk.Canvas(graphWindow, width=camHeight + 210, height=camHeight)
-graphCanvas.pack()
-graphWindow.withdraw()
+graphWindow = tk.Toplevel(controllerWindow)     # a new window derived from the root window "graphwindow"
+graphWindow.title("Position in function of time")   # define window title
+graphWindow.resizable(0, 0)     # define if resizable or not
+graphCanvas = tk.Canvas(graphWindow, width=camHeight + 210, height=camHeight)       # create a canvas widget in graphwindow
+graphCanvas.pack()      # pack the canvas widget
+graphWindow.withdraw()  # hide the graphwindow
 
-pointsListCircle = []
+pointsListCircle = []   # create an empty list to put points refinates that describes a circle patern
 
 
 def createPointsListCircle(radius):     # create an array of 360 points to describe a whole circle with the argument as radius
@@ -62,9 +62,9 @@ def createPointsListCircle(radius):     # create an array of 360 points to descr
         pointsListCircle.append([radius * cos(radians(angle)) + 240, radius * sin(radians(angle)) + 240])
 
 
-createPointsListCircle(150)
+createPointsListCircle(150)     # create a pointsListCircle list that defines a circle of radius 150
 
-pointsListEight = []
+pointsListEight = []        # create an empty list to put points refinates that describes an Eight patern
 
 
 def createPointsListEight(radius):      # create an array of 360 points to describe an Eight shape with the argument as radius
@@ -76,19 +76,19 @@ def createPointsListEight(radius):      # create an array of 360 points to descr
         pointsListEight.append([radius * cos(radians(angle)) + 240, radius * sin(radians(angle)) + 240 - radius])
 
 
-createPointsListEight(80)
+createPointsListEight(80)   # create a pointsListEight list that defines a Eight patern of radius 80
 
-drawCircleBool = False
+drawCircleBool = False      # flag to draw Circle
 
 
-def startDrawCircle():
-    global drawCircleBool, drawEightBool, consigneX, consigneY
+def startDrawCircle():      # function triggered by Circle pattern Button as a Toggle
+    global drawCircleBool, drawEightBool, refX, refY
     if drawCircleBool == False:
         drawCircleBool = True
         BballDrawCircle["text"] = "Centering the ball"
     else:
         drawCircleBool = False
-        consigneX, consigneY = 240, 240
+        refX, refY = 240, 240
         sliderCoefP.set(sliderCoefPDefault)
         BballDrawCircle["text"] = "moving the ball in circles"
 
@@ -96,47 +96,47 @@ def startDrawCircle():
 drawEightBool = False
 
 
-def startDrawEight():
-    global drawEightBool, drawCircleBool, consigneX, consigneY
+def startDrawEight():       # function triggered by Eight pattern Button as a Toggle
+    global drawEightBool, drawCircleBool, refX, refY
     if drawEightBool == False:
         drawEightBool = True
         BballDrawEight["text"] = "Centering the ball"
     else:
         drawEightBool = False
-        consigneX, consigneY = 240, 240
+        refX, refY = 240, 240
         sliderCoefP.set(sliderCoefPDefault)
         BballDrawEight["text"] = "moving the ball in Eights"
 
 
-pointCounter = 0
+pointCounter = 0    # a counter that will cover the whole 360 points in case of draw circle or eight
 
 
-def drawWithBall():
-    global pointCounter, consigneX, consigneY
+def drawWithBall():     # function triggered after the startDrawCircle or startDrawEight
+    global pointCounter, refX, refY
     if drawCircleBool == True:
         sliderCoefP.set(15)
         if pointCounter >= len(pointsListCircle):
             pointCounter = 0
         point = pointsListCircle[pointCounter]
-        consigneX, consigneY = point[0], point[1]
+        refX, refY = point[0], point[1]
         pointCounter += 7
     if drawEightBool == True:
         sliderCoefP.set(15)
         if pointCounter >= len(pointsListEight):
             pointCounter = 0
         point = pointsListEight[pointCounter]
-        consigneX, consigneY = point[0], point[1]
+        refX, refY = point[0], point[1]
         pointCounter += 7
 
 
-def setConsigneWithMouse(mousePosition):
-    global consigneX, consigneY
+def setRefWithMouse(mousePosition):   # set refX and refY based on the mousePosition, mousePosition is the realtime position of the mouse not a saved variable
+    global refX, refY
     if mousePosition.y > 10:
         refreshGraph()
-        consigneX, consigneY = mousePosition.x, mousePosition.y
+        refX, refY = mousePosition.x, mousePosition.y
 
 
-def getMouseClickPosition(mousePosition):
+def getMouseClickPosition(mousePosition):   # get mouse click position
     global mouseX, mouseY
     global getPixelColor
     mouseX, mouseY = mousePosition.x, mousePosition.y
@@ -146,7 +146,7 @@ def getMouseClickPosition(mousePosition):
 showVideoWindow = False
 
 
-def showCameraFrameWindow():
+def showCameraFrameWindow():    # function to toggle the showVideoWindow and change the label text of the button
     global showVideoWindow, showGraph
     global BShowVideoTxt
     if showVideoWindow == False:
@@ -163,18 +163,18 @@ def showCameraFrameWindow():
         BShowVideo["text"] = "Show Live CAM feed"
 
 
-showCalqueCalibrationBool = False
+showCalqueCalibrationBool = False       # bool for the toggle of the calibration display on the video window
 
 
-def showCalqueCalibration():
+def showCalqueCalibration():        # function that toggles the showCalqueCalibrationBool
     global showCalqueCalibrationBool
     showCalqueCalibrationBool = not showCalqueCalibrationBool
 
 
-showGraph = False
+showGraph = False   # bool for Graph window
 
 
-def showGraphWindow():
+def showGraphWindow():  # function that toggles the Graph window and update the show graph button
     global showGraph, showVideoWindow
     global BShowGraph
 
@@ -190,13 +190,13 @@ def showGraphWindow():
         BShowGraph["text"] = "Show Plot"
 
 
-t = 480
-consigneY = 240
-consigneX = 240
+t = 480     # time variable for the plotting and initialize at 480 for a good visualization
+refY = 240    # reference refinate Y
+refX = 240    # reference refinate X
 
 
-def paintGraph():
-    global t, consigneY, x, y, prevX, prevY, alpha, prevAlpha
+def paintGraph():   # function to plot in realtime the graphWindow
+    global t, refY, x, y, prevX, prevY, alpha, prevAlpha
     global showGraphPositionX, showGraphPositionY, showGraphAlpha
     if showGraph == True:
         graphWindow.deiconify()
@@ -217,23 +217,24 @@ def paintGraph():
             graphCanvas.create_line(550, 53, 740, 53, fill="#0069b5", width=5)
             graphCanvas.create_line(550, 73, 740, 73, fill="#8f0caf", width=5)
             if showGraphPositionX.get() == 1:
-                graphCanvas.create_line(3, consigneX, 480, consigneX, fill="#ff7777", width=2)
+                graphCanvas.create_line(3, refX, 480, refX, fill="#ff7777", width=2)
             if showGraphPositionY.get() == 1:
-                graphCanvas.create_line(3, consigneY, 480, consigneY, fill="#6f91f7", width=2)
+                graphCanvas.create_line(3, refY, 480, refY, fill="#6f91f7", width=2)
         t += 3
     else:
         graphWindow.withdraw()
 
 
-def refreshGraph():
+def refreshGraph():     # function that reset the time variable to 480 if the graph is full
     global t
     t = 480
 
 
-def endProgam():
+def endProgam():        # function to close root window
     controllerWindow.destroy()
 
 
+# Defining all the slider default values
 sliderHDefault = 15
 sliderSDefault = 70
 sliderVDefault = 70
@@ -242,7 +243,7 @@ sliderCoefIDefault = 0.1
 sliderCoefDDefault = 5.7
 
 
-def resetSlider():
+def resetSlider():  # function that reset the slider values to default
     sliderH.set(sliderHDefault)
     sliderS.set(sliderSDefault)
     sliderV.set(sliderVDefault)
@@ -251,25 +252,25 @@ def resetSlider():
     sliderCoefD.set(sliderCoefDDefault)
 
 
-def donothing():
+def donothing():    # function that does nothing, may be used for delay
     pass
 
 
-def rangerPlateau():
+def compactPlate():    # function that compact the plate
     if arduinoIsConnected == True:
-        if tkinter.messagebox.askokcancel("Warning", "Pensez à retirer le plateau."):
-            print("abaissement des bras")
-            ser.write(("descendreBras\n").encode())
+        if tkinter.messagebox.askokcancel("Warning", "Are you sure of compacting the plate ?"):
+            print("compacting the arms down")
+            ser.write(("Arms compacting Down\n").encode())
     else:
         if tkinter.messagebox.askokcancel("Warning", "Arduino is not Connected"):
             donothing()
 
 
-def eleverPlateau():
+def releasePlate():     # function that releases the plate
     global alpha
     if arduinoIsConnected == True:
-        if tkinter.messagebox.askokcancel("Warning", "Pensez à retirer le plateau."):
-            print("Elevation des bras")
+        if tkinter.messagebox.askokcancel("Warning", "Are you sure of Releasing the Plate ?"):
+            print("Releasing Arms Up")
             ser.write((str(dataDict[(0, 0)]) + "\n").encode())
             alpha = 0
     else:
@@ -277,9 +278,9 @@ def eleverPlateau():
             donothing()
 
 
-def servosTest():
+def servosTest():   # function that tests the servos by sweeping
     if arduinoIsConnected == True:
-        if tkinter.messagebox.askokcancel("Warning", "Le plateau doit être en place."):
+        if tkinter.messagebox.askokcancel("Warning", "The plate needs to be in Place"):
             for i in range(2):
                 beta = 0
                 alpha = 35
@@ -292,14 +293,14 @@ def servosTest():
             time.sleep(1)
             ser.write((str(dataDict[(0, 0)]) + "\n").encode())
     else:
-        if tkinter.messagebox.askokcancel("Attention", "Arduino is not Connected"):
+        if tkinter.messagebox.askokcancel("Warning", "Arduino is not Connected"):
             donothing()
 
 
-arduinoIsConnected = False
+arduinoIsConnected = False      # bool to determine if arduino is connected or not
 
 
-def connectArduino():
+def connectArduino():   # function that checks if arduino is connected or not, initialize the serial and toggles the bools
     global ser
     global label
     global arduinoIsConnected
@@ -309,24 +310,24 @@ def connectArduino():
             print(p)
             ser = serial.Serial(p[0], 19200, timeout=1)
             time.sleep(1)  # give the connection a second to settle
-            label.configure(text="Arduino connecté", fg="#36db8b")
+            label.configure(text="Arduino connecte", fg="#36db8b")
             arduinoIsConnected = True
 
 
-startBalanceBall = False
+startBalanceBall = False    # Bool for the toggling of the Controller
 
 
-def startBalance():
+def startBalance():     # function to toggle controller
     global startBalanceBall
     if arduinoIsConnected == True:
         if startBalanceBall == False:
             startBalanceBall = True
-            BStartBalance["text"] = "Arrêter"
+            BStartBalance["text"] = "Stop"
         else:
             startBalanceBall = False
-            BStartBalance["text"] = "Commencer"
+            BStartBalance["text"] = "Start"
     else:
-        if tkinter.messagebox.askokcancel("Attention", "Arduino is not Connected"):
+        if tkinter.messagebox.askokcancel("Warning", "Arduino is not Connected"):
             donothing()
 
 
@@ -337,7 +338,7 @@ alpha, beta, prevAlpha, prevBeta = 0, 0, 0, 0
 omega = 0.2
 
 
-def PIDcontrol(ballPosX, ballPosY, prevBallPosX, prevBallPosY, consigneX, consigneY):
+def PIDcontrol(ballPosX, ballPosY, prevBallPosX, prevBallPosY, refX, refY):     # PID controller
     global omega
     global sommeErrorX, sommeErrorY
     global alpha, beta, prevAlpha, prevBeta
@@ -347,8 +348,8 @@ def PIDcontrol(ballPosX, ballPosY, prevBallPosX, prevBallPosY, consigneX, consig
     Ki = sliderCoefI.get()
     Kd = sliderCoefD.get()
 
-    Ix = Kp * (consigneX - ballPosX) + Ki * sommeErrorX + Kd * ((prevBallPosX - ballPosX) / 0.0333)
-    Iy = Kp * (consigneY - ballPosY) + Ki * sommeErrorY + Kd * ((prevBallPosY - ballPosY) / 0.0333)
+    Ix = Kp * (refX - ballPosX) + Ki * sommeErrorX + Kd * ((prevBallPosX - ballPosX) / 0.0333)
+    Iy = Kp * (refY - ballPosY) + Ki * sommeErrorY + Kd * ((prevBallPosY - ballPosY) / 0.0333)
 
     Ix = round(Ix / 10000, 4)
     Iy = round(Iy / 10000, 4)
@@ -405,7 +406,7 @@ def PIDcontrol(ballPosX, ballPosY, prevBallPosX, prevBallPosY, consigneX, consig
     alpha = prevAlpha * omega + (1 - omega) * alpha
     beta = prevBeta * omega + (1 - omega) * beta
 
-    alpha = round(round(alpha / 0.2) * 0.2, -int(floor(log10(0.2))))  ## permet d'arrondire avec 0.2 de précision
+    alpha = round(round(alpha / 0.2) * 0.2, -int(floor(log10(0.2))))  ## permet d'arrondire avec 0.2 de precision
     beta = round(round(beta / 0.2) * 0.2, -int(floor(log10(0.2))))
 
     if alpha <= 35 and beta <= 360 and arduinoIsConnected == True and startBalanceBall == True:
@@ -415,12 +416,12 @@ def PIDcontrol(ballPosX, ballPosY, prevBallPosX, prevBallPosY, consigneX, consig
     print(Ix, Iy, alpha, beta, ballPosX, ballPosY, prevBallPosX, prevBallPosY, sommeErrorX, sommeErrorY)
 
     if startBalanceBall == True:
-        sommeErrorX += (consigneX - ballPosX)
-        sommeErrorY += (consigneY - ballPosY)
+        sommeErrorX += (refX - ballPosX)
+        sommeErrorY += (refY - ballPosY)
 
 
 prevX, prevY = 0, 0
-prevConsigneX, prevConsigneY = 0, 0
+prevRefX, prevRefY = 0, 0
 start_time = 0
 
 
@@ -429,18 +430,17 @@ def main():     # declaring the main function of the program
     global H, S, V
     global getPixelColor
     global x, y, alpha, beta
-    global prevX, prevY, prevAlpha, prevBeta, prevConsigneX, prevConsigneY
-    global consigneX, consigneY, sommeErrorX, sommeErrorY
+    global prevX, prevY, prevAlpha, prevBeta, prevRefX, prevRefY
+    global refX, refY, sommeErrorX, sommeErrorY
     global camWidth, camHeight
     global timeInterval, start_time
     global showVideoWindow
 
     _, img = cam.read()     # capturing the image from the cam object, ignore bool, store it in img
-    img = img[0:int(camHeight),
-          int((camWidth - camHeight) / 2):int(camWidth - ((camWidth - camHeight) / 2))]     # cropping, [Y1:Y2,X1:X2]
-    imgCircle = np.zeros(img.shape, dtype=np.uint8)     # create a black image with same size of img
-    cv2.circle(imgCircle, (240, 240), 270, (255, 255, 255), -1, 8, 0)       # create a white mask
-    img = img & imgCircle       # masking
+    img = img[0:int(camHeight), int((camWidth - camHeight) / 2):int(camWidth - ((camWidth - camHeight) / 2))]     # cropping, [Y1:Y2,X1:X2]
+    #imgCircle = np.zeros(img.shape, dtype=np.uint8)     # create a black image with same size of img
+    #cv2.circle(imgCircle, (240, 240), 270, (255, 255, 255), -1, 8, 0)       # create a white mask
+    #img = img & imgCircle       # masking
     imgHSV = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
 
     if getPixelColor == True and mouseY > 0 and mouseY < 480 and mouseX < 480:
@@ -457,7 +457,7 @@ def main():     # declaring the main function of the program
     upperBound = np.array([H + sliderH.get(), S + sliderS.get(), V + sliderV.get()])
 
     mask = cv2.inRange(imgHSV, lowerBound, upperBound)
-    mask = cv2.blur(mask, (6, 6))  # ajoute du flou à l'image
+    mask = cv2.blur(mask, (6, 6))  # ajoute du flou a l'image
     mask = cv2.erode(mask, None, iterations=2)  # retire les parasites
     mask = cv2.dilate(mask, None, iterations=2)  # retire les parasites
 
@@ -465,7 +465,7 @@ def main():     # declaring the main function of the program
     cnts = cnts[0] if imutils.is_cv2() else cnts[1]
     center = None
 
-    cv2.circle(img, (int(consigneX), int(consigneY)), int(4), (255, 0, 0), 2)
+    cv2.circle(img, (int(refX), int(refY)), int(4), (255, 0, 0), 2)
     if showCalqueCalibrationBool == True:
         cv2.circle(img, (240, 240), 220, (255, 0, 0), 2)
         cv2.circle(img, (240, 240), 160, (255, 0, 0), 2)
@@ -480,7 +480,7 @@ def main():     # declaring the main function of the program
             cv2.putText(img, str(int(x)) + ";" + str(int(y)).format(0, 0), (int(x) - 50, int(y) - 50),
                         cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2)
             cv2.circle(img, (int(x), int(y)), int(radius), (0, 255, 255), 2)
-            PIDcontrol(int(x), int(y), prevX, prevY, consigneX, consigneY)
+            PIDcontrol(int(x), int(y), prevX, prevY, refX, refY)
             start_time = time.time()
     else:
         sommeErrorX, sommeErrorY = 0, 0
@@ -494,16 +494,19 @@ def main():     # declaring the main function of the program
     lmain.after(5, main)
 
     drawWithBall()
-    if prevConsigneX != consigneX or prevConsigneY != consigneY:
+    if prevRefX != refX or prevRefY != refY:
         sommeErrorX, sommeErrorY = 0, 0
 
     paintGraph()
     prevX, prevY = int(x), int(y)
-    prevConsigneX, prevConsigneY = consigneX, consigneY
+    prevRefX, prevRefY = refX, refY
     prevAlpha = alpha
     prevBeta = beta
 
-    print("FPS: ", 1.0 / (time.time() - start_timeFPS))
+    try:
+        print("FPS: ", 1.0 / (time.time() - start_timeFPS))
+    except ZeroDivisionError:
+        print("FPS: inf")
 
 
 FrameVideoControl = tk.LabelFrame(controllerWindow, text="Video Control")
@@ -531,9 +534,9 @@ sliderV.pack()
 
 FrameServosControl = tk.LabelFrame(controllerWindow, text="Servos Control")
 FrameServosControl.place(x=20, y=315, width=380)
-BAbaissementPlateau = tk.Button(FrameServosControl, text="Ranger les bras", command=rangerPlateau)
-BAbaissementPlateau.pack()
-BElevationBras = tk.Button(FrameServosControl, text="Mettre en place le plateau", command=eleverPlateau)
+BAbaissementPlate = tk.Button(FrameServosControl, text="Compact Arms", command=compactPlate)
+BAbaissementPlate.pack()
+BElevationBras = tk.Button(FrameServosControl, text="Release Plate", command=releasePlate)
 BElevationBras.pack()
 BTesterServos = tk.Button(FrameServosControl, text="Test Servomotors", command=servosTest)
 BTesterServos.pack()
@@ -587,7 +590,7 @@ CheckbuttonAlpha.place(x=500, y=60)
 
 videoWindow.protocol("WM_DELETE_WINDOW", donothing)
 videoWindow.bind("<Button-2>", getMouseClickPosition)
-videoWindow.bind("<Button-1>", setConsigneWithMouse)
+videoWindow.bind("<Button-1>", setRefWithMouse)     # mouse click to set reference position
 
 main()
 tk.mainloop()
