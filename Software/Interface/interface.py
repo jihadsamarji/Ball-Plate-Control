@@ -10,8 +10,12 @@ import serial.tools.list_ports
 from math import *
 
 lines = open("data.txt").read().splitlines()  # Read the file data.txt and split it by lines and put it in a list
-lines = lines[:-11]  # Remove the last 11 lines ( because they contain descriptions)
-lines = lines[1:]  # Remove the first line ( because it contains the titles )
+max_alpha, max_theta = lines[1].split("|")
+max_alpha = - float(max_alpha)
+max_theta = float(max_theta)
+
+#lines = lines[:-11]  # Remove the last 11 lines ( because they contain descriptions)
+#lines = lines[1:]  # Remove the first line ( because it contains the titles )
 
 dataDict = {}
 
@@ -26,11 +30,9 @@ H, S, V = 0, 0, 0   # the color properties of the Pixel to track
 
 mouseX, mouseY = 0, 0   # declare variables to capture mouse position for color tracking
 
-for i in range(0, len(lines)):  # for loop to go over the lines list and feed it to the dictionary
-    key, value = lines[i].split("#")
-    alpha, beta = key.split("|")
-    angleA, angleB, angleC = value.split("|")
-    dataDict[(float(alpha), float(beta))] = (float(angleA), float(angleB), float(angleC))
+for i in range(1, len(lines)):  # for loop to go over the lines list and feed it to the dictionary
+    alpha, theta = lines[i].split("|")
+    dataDict[float(alpha)] = float(theta)
 
 controllerWindow = tk.Tk()  # initializes this tk interpreter and creates the root window
 controllerWindow.title("Control Window")    # define title of the root window
@@ -260,7 +262,7 @@ def compactPlate():    # function that compact the plate
     if arduinoIsConnected == True:
         if tkinter.messagebox.askokcancel("Warning", "Are you sure of compacting the plate ?"):
             print("compacting the arms down")
-            ser.write(("Arms compacting Down\n").encode())
+            ser.write(("compactPlate\n").encode())
     else:
         if tkinter.messagebox.askokcancel("Warning", "Arduino is not Connected"):
             donothing()
@@ -271,7 +273,7 @@ def releasePlate():     # function that releases the plate
     if arduinoIsConnected == True:
         if tkinter.messagebox.askokcancel("Warning", "Are you sure of Releasing the Plate ?"):
             print("Releasing Arms Up")
-            ser.write((str(dataDict[(0, 0)]) + "\n").encode())
+            ser.write((str(dataDict[0]) + "\n").encode())
             alpha = 0
     else:
         if tkinter.messagebox.askokcancel("Warning", "Arduino is not Connected"):
@@ -279,19 +281,35 @@ def releasePlate():     # function that releases the plate
 
 
 def servosTest():   # function that tests the servos by sweeping
+    global max_alpha
     if arduinoIsConnected == True:
         if tkinter.messagebox.askokcancel("Warning", "The plate needs to be in Place"):
-            for i in range(2):
+            for i in range(1):
+                alpha = 0
                 beta = 0
-                alpha = 35
-                while beta < 360:
-                    ser.write((str(dataDict[(alpha, beta)]) + "\n").encode())
+                while alpha < max_alpha:
+                    ser.write((str(dataDict[alpha]) + "," + str(dataDict[beta]) + "\n").encode())
                     ser.flush()
                     time.sleep(0.002)
-                    beta = round(beta + 0.2, 2)
-                    print(alpha, beta)
-            time.sleep(1)
-            ser.write((str(dataDict[(0, 0)]) + "\n").encode())
+                    alpha = round(alpha + 0.1, 1)
+                    print(str(alpha) + "|" + str(dataDict[alpha]))
+                # alpha = 0
+                # beta = 0
+                # while beta < max_alpha:
+                #     ser.write((str(dataDict[alpha]) + "," + str(dataDict[beta]) + "\n").encode())
+                #     ser.flush()
+                #     time.sleep(0.002)
+                #     beta = round(beta + 0.1, 1)
+                #     print(str(beta) + "|" + str(dataDict[beta]))
+                # alpha = - max_alpha
+            #     while alpha < max_alpha :
+            #         ser.write((str(dataDict[alpha]) + "," + str(dataDict[alpha]) + "\n").encode())
+            #         ser.flush()
+            #         time.sleep(0.002)
+            #         alpha = round(alpha + 0.1, 1)
+            #         print(alpha + "|" + theta)
+            # time.sleep(1)
+            # ser.write((str(dataDict[0]) + "," + str(dataDict[0]) + "\n").encode())
     else:
         if tkinter.messagebox.askokcancel("Warning", "Arduino is not Connected"):
             donothing()

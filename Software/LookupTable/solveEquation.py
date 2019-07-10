@@ -22,7 +22,7 @@ max_theta = arcsin(sin(alpha)*K)
 
 for alpha in range(-maxAlpha,maxAlpha+1):
     alpha = radians(alpha/10)
-    theta = arcsin(sin(alpha)*K) + max_theta
+    theta = arcsin(sin(alpha)*K) + pi/2
     separator = "|"
     data = str(round(degrees(alpha),2)) + separator + str(round(degrees(theta),2)) + "\n"
     file.write(data)
