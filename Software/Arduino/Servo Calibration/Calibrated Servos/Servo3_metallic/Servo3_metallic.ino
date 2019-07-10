@@ -11,18 +11,16 @@
 Servo myservo;  // create servo object to control a servo
 // twelve servo objects can be created on most boards
 
-int pos = 9;    // variable to store the servo position
+int pos = 90;    // variable to store the servo position
 
 void setup() {
-  Serial.begin(9600);
-  //myservo.attach(9);  // attaches the servo on pin 9 to the servo object with default pulse width
   myservo.attach(9, 500, 2500);  // attaches the servo on pin 9 to the servo object with Calibrated values of pulse width (Nb: max angle is less than 180)
+  //myservo.attach(9);  // attaches the servo on pin 9 to the servo object with default pulse width
   myservo.write(pos);
-
+  delay(1000); 
+  myservo.detach();
 }
 
 void loop() {
 
-
 }
-
