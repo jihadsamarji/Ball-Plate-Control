@@ -3,7 +3,7 @@ from math import *
 
 #values in cm
 dm = 1.7 #  distance from motor shaft to pole
-dc = 11.8 #   distance between center pole and side pole
+dc = 6.2 #   distance between center pole and side pole
 K = dc/dm # factor
 
 print("...")
@@ -16,7 +16,7 @@ file = open("data.txt", "w") #create file
 firstline = "alpha|theta\n"
 file.write(firstline)
 
-maxAlpha = 82
+maxAlpha = 158
 alpha = radians(maxAlpha/10)
 max_theta = arcsin(sin(alpha)*K)
 

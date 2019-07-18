@@ -2,8 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4b1d5d56-9629-45fc-956c-24cc999d926b" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../Arduino/Full_Program/Full_Program.ino" beforeDir="false" afterPath="$PROJECT_DIR$/../Arduino/Full_Program/Full_Program.ino" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Arduino/RTouchScreen/RTouchScreen.ino" beforeDir="false" afterPath="$PROJECT_DIR$/../Arduino/RTouchScreen/RTouchScreen.ino" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Arduino/Servo Calibration/Calibrated Servos/Servo1/Servo1.ino" beforeDir="false" afterPath="$PROJECT_DIR$/../Arduino/Servo Calibration/Calibrated Servos/Servo1/Servo1.ino" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Arduino/Servo Calibration/Calibrated Servos/Servo2_Hk/Servo2_Hk.ino" beforeDir="false" afterPath="$PROJECT_DIR$/../Arduino/Servo Calibration/Calibrated Servos/Servo2_Hk/Servo2_Hk.ino" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Arduino/Servo_tests/Joystick Control/Joystick_Control.lnk/Joystick_Control.lnk.ino" beforeDir="false" afterPath="$PROJECT_DIR$/../Arduino/Servo_tests/Joystick Control/Joystick_Control.lnk/Joystick_Control.lnk.ino" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Arduino/Servo_tests/Servo1_sweep_test/Servo1_sweep_test.ino" beforeDir="false" afterPath="$PROJECT_DIR$/../Arduino/Servo_tests/Servo1_sweep_test/Servo1_sweep_test.ino" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/interface.py" beforeDir="false" afterPath="$PROJECT_DIR$/interface.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LookupTable/data.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../LookupTable/data.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LookupTable/solveEquation.py" beforeDir="false" afterPath="$PROJECT_DIR$/../LookupTable/solveEquation.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Matlab &amp; Simulation/State_space.m" beforeDir="false" afterPath="$PROJECT_DIR$/../Matlab &amp; Simulation/State_space.m" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -19,8 +29,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/interface.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="59">
-              <caret line="288" column="24" lean-forward="true" selection-start-line="288" selection-start-column="24" selection-end-line="288" selection-end-column="24" />
+            <state relative-caret-position="192">
+              <caret line="66" column="25" selection-start-line="66" selection-start-column="25" selection-end-line="66" selection-end-column="25" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
               </folding>
@@ -32,11 +42,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>ser</find>
-      <find>conn</find>
-      <find>start</find>
-      <find>start_time</find>
-      <find>star</find>
       <find>start_timeFPS</find>
       <find>FPS</find>
       <find>tk.main</find>
@@ -55,13 +60,18 @@
       <find>coord</find>
       <find>Coord</find>
       <find>mask</find>
-      <find>crop</find>
       <find>Image</find>
       <find>fromar</find>
       <find>cr</find>
       <find>x =</find>
       <find>x</find>
       <find>dataDic</find>
+      <find>test</find>
+      <find>somme</find>
+      <find>slider</find>
+      <find>default</find>
+      <find>crop</find>
+      <find>circle</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -88,7 +98,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -100,6 +109,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -268,10 +278,19 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/../LookupTable/solveEquation.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#19#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/interface.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="59">
-          <caret line="288" column="24" lean-forward="true" selection-start-line="288" selection-start-column="24" selection-end-line="288" selection-end-column="24" />
+        <state relative-caret-position="192">
+          <caret line="66" column="25" selection-start-line="66" selection-start-column="25" selection-end-line="66" selection-end-column="25" />
           <folding>
             <element signature="e#0#10#0" expanded="true" />
           </folding>

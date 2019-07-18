@@ -14,7 +14,7 @@ Servo myservo;  // create servo object to control a servo
 int pos = 90;    // variable to store the servo position
 
 void setup() {
-  myservo.attach(9, 470, 2200);  // attaches the servo on pin 9 to the servo object with Calibrated values of pulse width (Nb: max angle is less than 180)
+  myservo.attach(9, 500, 2300);  // attaches the servo on pin 9 to the servo object with Calibrated values of pulse width (Nb: max angle is less than 180)
   //myservo.attach(9);  // attaches the servo on pin 9 to the servo object with default pulse width
   myservo.write(pos);
   delay(1000); 

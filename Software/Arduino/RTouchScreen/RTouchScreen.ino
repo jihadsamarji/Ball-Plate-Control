@@ -1,3 +1,4 @@
+
 /*=================================
 This code demostrates 4-Wire Touch screen 
 interfacing with Arduino
@@ -37,6 +38,7 @@ int readX()
    if (X != 0)
    {
     X = map(X, 40, 870 , - Xresolution / 2, Xresolution / 2); //Reads X axis touch position
+    
    }
    return X;
 }

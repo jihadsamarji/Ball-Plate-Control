@@ -64,7 +64,7 @@ def createPointsListCircle(radius):     # create an array of 360 points to descr
         pointsListCircle.append([radius * cos(radians(angle)) + 240, radius * sin(radians(angle)) + 240])
 
 
-createPointsListCircle(150)     # create a pointsListCircle list that defines a circle of radius 150
+createPointsListCircle(60)     # create a pointsListCircle list that defines a circle of radius 150
 
 pointsListEight = []        # create an empty list to put points refinates that describes an Eight patern
 
@@ -238,11 +238,11 @@ def endProgam():        # function to close root window
 
 # Defining all the slider default values
 sliderHDefault = 15
-sliderSDefault = 70
-sliderVDefault = 70
-sliderCoefPDefault = 10
-sliderCoefIDefault = 0.1
-sliderCoefDDefault = 5.7
+sliderSDefault = 40
+sliderVDefault = 40
+sliderCoefPDefault = 0.1
+sliderCoefIDefault = 0.001
+sliderCoefDDefault = 0.1
 
 
 def resetSlider():  # function that reset the slider values to default
@@ -273,7 +273,7 @@ def releasePlate():     # function that releases the plate
     if arduinoIsConnected == True:
         if tkinter.messagebox.askokcancel("Warning", "Are you sure of Releasing the Plate ?"):
             print("Releasing Arms Up")
-            ser.write((str(dataDict[0]) + "\n").encode())
+            ser.write((str(dataDict[0]) + "," + str(dataDict[0]) + "\n").encode())
             alpha = 0
     else:
         if tkinter.messagebox.askokcancel("Warning", "Arduino is not Connected"):
@@ -290,26 +290,41 @@ def servosTest():   # function that tests the servos by sweeping
                 while alpha < max_alpha:
                     ser.write((str(dataDict[alpha]) + "," + str(dataDict[beta]) + "\n").encode())
                     ser.flush()
-                    time.sleep(0.002)
+                    time.sleep(0.02)
                     alpha = round(alpha + 0.1, 1)
                     print(str(alpha) + "|" + str(dataDict[alpha]))
-                # alpha = 0
-                # beta = 0
-                # while beta < max_alpha:
-                #     ser.write((str(dataDict[alpha]) + "," + str(dataDict[beta]) + "\n").encode())
-                #     ser.flush()
-                #     time.sleep(0.002)
-                #     beta = round(beta + 0.1, 1)
-                #     print(str(beta) + "|" + str(dataDict[beta]))
-                # alpha = - max_alpha
-            #     while alpha < max_alpha :
-            #         ser.write((str(dataDict[alpha]) + "," + str(dataDict[alpha]) + "\n").encode())
-            #         ser.flush()
-            #         time.sleep(0.002)
-            #         alpha = round(alpha + 0.1, 1)
-            #         print(alpha + "|" + theta)
-            # time.sleep(1)
-            # ser.write((str(dataDict[0]) + "," + str(dataDict[0]) + "\n").encode())
+                while alpha > -max_alpha:
+                    ser.write((str(dataDict[alpha]) + "," + str(dataDict[beta]) + "\n").encode())
+                    ser.flush()
+                    time.sleep(0.02)
+                    alpha = round(alpha - 0.1, 1)
+                    print(str(alpha) + "|" + str(dataDict[alpha]))
+                while beta < max_alpha:
+                    ser.write((str(dataDict[alpha]) + "," + str(dataDict[beta]) + "\n").encode())
+                    ser.flush()
+                    time.sleep(0.02)
+                    beta = round(beta + 0.1, 1)
+                    print(str(beta) + "|" + str(dataDict[beta]))
+                while beta > -max_alpha:
+                    ser.write((str(dataDict[alpha]) + "," + str(dataDict[beta]) + "\n").encode())
+                    ser.flush()
+                    time.sleep(0.02)
+                    beta = round(beta - 0.1, 1)
+                    print(str(beta) + "|" + str(dataDict[beta]))
+                while alpha < max_alpha :
+                    ser.write((str(dataDict[alpha]) + "," + str(dataDict[alpha]) + "\n").encode())
+                    ser.flush()
+                    time.sleep(0.02)
+                    alpha = round(alpha + 0.1, 1)
+                    print(str(alpha) + "|" + str(dataDict[alpha]))
+                while alpha > -max_alpha :
+                    ser.write((str(dataDict[alpha]) + "," + str(dataDict[alpha]) + "\n").encode())
+                    ser.flush()
+                    time.sleep(0.02)
+                    alpha = round(alpha - 0.1, 1)
+                    print(str(alpha) + "|" + str(dataDict[alpha]))
+            time.sleep(1)
+            ser.write((str(dataDict[0]) + "," + str(dataDict[0]) + "\n").encode())
     else:
         if tkinter.messagebox.askokcancel("Warning", "Arduino is not Connected"):
             donothing()
@@ -349,16 +364,16 @@ def startBalance():     # function to toggle controller
             donothing()
 
 
-sommeErrorX = 1
-sommeErrorY = 1
+totalErrorX = 0
+totalErrorY = 0
 timeInterval = 1
 alpha, beta, prevAlpha, prevBeta = 0, 0, 0, 0
-omega = 0.2
+omega = 0.1
 
 
 def PIDcontrol(ballPosX, ballPosY, prevBallPosX, prevBallPosY, refX, refY):     # PID controller
     global omega
-    global sommeErrorX, sommeErrorY
+    global totalErrorX, totalErrorY
     global alpha, beta, prevAlpha, prevBeta
     global startBalanceBall, arduinoIsConnected
 
@@ -366,76 +381,45 @@ def PIDcontrol(ballPosX, ballPosY, prevBallPosX, prevBallPosY, refX, refY):     
     Ki = sliderCoefI.get()
     Kd = sliderCoefD.get()
 
-    Ix = Kp * (refX - ballPosX) + Ki * sommeErrorX + Kd * ((prevBallPosX - ballPosX) / 0.0333)
-    Iy = Kp * (refY - ballPosY) + Ki * sommeErrorY + Kd * ((prevBallPosY - ballPosY) / 0.0333)
+    #Kp = 0.02
+    #Ki = 0
+    #Kd = 0.01
 
-    Ix = round(Ix / 10000, 4)
-    Iy = round(Iy / 10000, 4)
+    Ix = Kp * (refX - ballPosX) + Ki * totalErrorX + Kd * (prevBallPosX - ballPosX)
+    Iy = Kp * (refY - ballPosY) + Ki * totalErrorY + Kd * (prevBallPosY - ballPosY)
 
-    if Ix == 0 and Iy == 0:
-        alpha = 0
-        beta = 0
+    #Ix = Kp * (refX - ballPosX)
+    #Iy = Kp * (refX - ballPosY)
 
-    elif Ix != 0 and sqrt(Ix ** 2 + Iy ** 2) < 1:
-        beta = atan(Iy / Ix)
-        alpha = asin(sqrt(Ix ** 2 + Iy ** 2))
-        beta = degrees(beta)
-        alpha = degrees(alpha)
-        if Ix < 0 and Iy >= 0:
-            beta = abs(beta)
-        elif Ix > 0 and Iy >= 0:
-            beta = 180 - abs(beta)
-        elif Ix > 0 and Iy <= 0:
-            beta = 180 + abs(beta)
-        elif Ix < 0 and Iy <= 0:
-            beta = 360 - abs(beta)
+    Ix = round(Ix , 1)
+    Iy = round(Iy , 1)
 
-    elif Ix == 0 and sqrt(Ix ** 2 + Iy ** 2) < 1:
-        if Iy > 0:
-            beta = 90
-            alpha = asin(sqrt(Ix ** 2 + Iy ** 2))
-        elif Iy < 0:
-            beta = 270
-            alpha = asin(sqrt(Ix ** 2 + Iy ** 2))
-        alpha = degrees(alpha)
 
-    elif Ix != 0 and sqrt(Ix ** 2 + Iy ** 2) > 1:
-        beta = degrees(atan(Iy / Ix))
-        alpha = 35
-        if Ix < 0 and Iy >= 0:
-            beta = abs(beta)
-        elif Ix > 0 and Iy >= 0:
-            beta = 180 - abs(beta)
-        elif Ix > 0 and Iy <= 0:
-            beta = 180 + abs(beta)
-        elif Ix < 0 and Iy <= 0:
-            beta = 360 - abs(beta)
 
-    elif Ix == 0 and sqrt(Ix ** 2 + Iy ** 2) > 1:
-        alpha = 35
-        if Iy > 0:
-            beta = 90
-        elif Iy < 0:
-            beta = 270
+    if Ix > max_alpha:
+        Ix = max_alpha
+    elif Ix < - max_alpha:
+        Ix = - max_alpha
+    if Iy > max_alpha:
+        Iy = max_alpha
+    elif Iy < - max_alpha:
+        Iy = - max_alpha
 
-    if alpha > 35:
-        alpha = 35
+    #alpha = prevAlpha * omega + (1 - omega) * alpha
+    #beta = prevBeta * omega + (1 - omega) * beta
 
-    alpha = prevAlpha * omega + (1 - omega) * alpha
-    beta = prevBeta * omega + (1 - omega) * beta
+    #alpha = round(round(alpha / 0.1) * 0.1, -int(floor(log10(0.1))))  ## permet d'arrondire avec 0.1 de precision
+    #beta = round(round(beta / 0.1) * 0.1, -int(floor(log10(0.1))))
 
-    alpha = round(round(alpha / 0.2) * 0.2, -int(floor(log10(0.2))))  ## permet d'arrondire avec 0.2 de precision
-    beta = round(round(beta / 0.2) * 0.2, -int(floor(log10(0.2))))
-
-    if alpha <= 35 and beta <= 360 and arduinoIsConnected == True and startBalanceBall == True:
-        ser.write((str(dataDict[(alpha, beta)]) + "\n").encode())
+    if arduinoIsConnected == True and startBalanceBall == True:
+        ser.write((str(dataDict[Ix]) + "," + str(dataDict[-Iy]) + "\n").encode())
 
     # print(alpha, beta)
-    print(Ix, Iy, alpha, beta, ballPosX, ballPosY, prevBallPosX, prevBallPosY, sommeErrorX, sommeErrorY)
+    print(Ix, Iy, alpha, beta, ballPosX, ballPosY, prevBallPosX, prevBallPosY, totalErrorX, totalErrorY)
 
     if startBalanceBall == True:
-        sommeErrorX += (refX - ballPosX)
-        sommeErrorY += (refY - ballPosY)
+        totalErrorX += (refX - ballPosX)
+        totalErrorY += (refY - ballPosY)
 
 
 prevX, prevY = 0, 0
@@ -449,13 +433,13 @@ def main():     # declaring the main function of the program
     global getPixelColor
     global x, y, alpha, beta
     global prevX, prevY, prevAlpha, prevBeta, prevRefX, prevRefY
-    global refX, refY, sommeErrorX, sommeErrorY
+    global refX, refY, totalErrorX, totalErrorY
     global camWidth, camHeight
     global timeInterval, start_time
     global showVideoWindow
 
     _, img = cam.read()     # capturing the image from the cam object, ignore bool, store it in img
-    img = img[0:int(camHeight), int((camWidth - camHeight) / 2):int(camWidth - ((camWidth - camHeight) / 2))]     # cropping, [Y1:Y2,X1:X2]
+    img = img[0:int(camHeight),int((camWidth-camHeight)/2):int(camWidth-((camWidth-camHeight)/2))] #[Y1:Y2,X1:X2]
     #imgCircle = np.zeros(img.shape, dtype=np.uint8)     # create a black image with same size of img
     #cv2.circle(imgCircle, (240, 240), 270, (255, 255, 255), -1, 8, 0)       # create a white mask
     #img = img & imgCircle       # masking
@@ -501,7 +485,7 @@ def main():     # declaring the main function of the program
             PIDcontrol(int(x), int(y), prevX, prevY, refX, refY)
             start_time = time.time()
     else:
-        sommeErrorX, sommeErrorY = 0, 0
+        totalErrorX, totalErrorY = 0, 0
 
     if showVideoWindow == True:
         img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
@@ -513,7 +497,7 @@ def main():     # declaring the main function of the program
 
     drawWithBall()
     if prevRefX != refX or prevRefY != refY:
-        sommeErrorX, sommeErrorY = 0, 0
+        totalErrorX, totalErrorY = 0, 0
 
     paintGraph()
     prevX, prevY = int(x), int(y)
@@ -565,15 +549,15 @@ FramePIDCoef = tk.LabelFrame(controllerWindow, text="PID coefficients")
 FramePIDCoef.place(x=420, y=20, width=380)
 BShowGraph = tk.Button(FramePIDCoef, text="Plot on Graph", command=showGraphWindow)
 BShowGraph.pack()
-sliderCoefP = tk.Scale(FramePIDCoef, from_=0, to=15, orient="horizontal", label="P", length=350, tickinterval=3,
+sliderCoefP = tk.Scale(FramePIDCoef, from_=0, to=0.1, orient="horizontal", label="P", length=350, tickinterval=3,
                        resolution=0.01)
 sliderCoefP.set(sliderCoefPDefault)
 sliderCoefP.pack()
-sliderCoefI = tk.Scale(FramePIDCoef, from_=0, to=1, orient="horizontal", label="I", length=350, tickinterval=0.2,
+sliderCoefI = tk.Scale(FramePIDCoef, from_=0, to=0.1, orient="horizontal", label="I", length=350, tickinterval=0.2,
                        resolution=0.001)
 sliderCoefI.set(sliderCoefIDefault)
 sliderCoefI.pack()
-sliderCoefD = tk.Scale(FramePIDCoef, from_=0, to=10, orient="horizontal", label="D", length=350, tickinterval=2,
+sliderCoefD = tk.Scale(FramePIDCoef, from_=0, to=5, orient="horizontal", label="D", length=350, tickinterval=2,
                        resolution=0.01)
 sliderCoefD.set(sliderCoefDDefault)
 sliderCoefD.pack()

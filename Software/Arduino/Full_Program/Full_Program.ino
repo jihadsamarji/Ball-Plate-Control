@@ -13,12 +13,11 @@ void setup() {
   Serial.begin(19200);
   pinMode(ledTemoin, OUTPUT); // led temoin
   digitalWrite(ledTemoin,HIGH);
-  servoA.attach(9, 470, 2200);      //servo A
-  servoB.attach(10, 500, 2500);    //servo B
+  servoA.attach(9, 500, 2300);      //servo A
+  servoB.attach(10, 600, 2200);    //servo B
 
   delay(1000);
   servoA.write(angleA);
-  delay(1000);
   servoB.write(angleB);
   delay(1000);
 }
@@ -31,11 +30,11 @@ void loop() {
   if(Serial.available() > 0) {
     String a = Serial.readStringUntil('\n');
     if(a == "compactPlate"){
-      angleA = 90;
-      angleB = 90;
+      angleA = 0;
+      angleB = 0;
     }else{
-      a.remove(0,1);
-      a.remove(a.length() - 1,1); 
+      //a.remove(0,1);
+      //a.remove(a.length() - 1,1); 
       angleA = getValue(a, ',', 0).toFloat();  
       angleB = getValue(a, ',', 1).toFloat();      
     }
