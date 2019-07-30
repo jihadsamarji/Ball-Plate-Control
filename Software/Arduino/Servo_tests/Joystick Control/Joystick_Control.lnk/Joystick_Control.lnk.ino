@@ -1,7 +1,4 @@
-/* MG 946R Servo Calibration
- by Jihad Alsamarji 
- This example code is in the public domain.
-
+/*
  modified 20 Mar 2019
  by Jihad Alsamarji
 */
