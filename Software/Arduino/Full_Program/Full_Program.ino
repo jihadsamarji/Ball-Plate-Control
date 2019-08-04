@@ -10,12 +10,11 @@ float angleB = 90;
 
 void setup() {
   Serial.begin(19200);
-  servoA.attach(9);
-  servoB.attach(10);
-  delay(1000);
-  angleA = map(angleA,20,160,0,180);
+  servoA.attach(10,500,2600);
+  servoB.attach(6,500,2600);
+  //angleA = map(angleA,20,160,0,180);
   servoA.write(angleA);
-  angleB = map(angleB,20,160,0,180);
+  //angleB = map(angleB,20,160,0,180);
   servoB.write(angleB);
   delay(1000);
 }
@@ -23,17 +22,12 @@ void setup() {
 int count = 0;
 
 void loop() {
-  //digitalWrite(ledTemoin , millis() / 500 % 2 ); // led temoin clignotement
+
   if(Serial.available() > 0) {
     String a = Serial.readStringUntil('\n');
-    //Serial.read();
     angleA = getValue(a, ',', 0).toFloat();  
     angleB = getValue(a, ',', 1).toFloat();      
-    //angleA = map(angleA,10,170,0,180);
-    //angleB = map(angleB,10,170,0,180);
-    //angleA = map(angleA,20,160,0,180);
     servoA.write(angleA);
-    //angleB = map(angleB,20,160,0,180);
     servoB.write(angleB);
     //delay(3);
   }

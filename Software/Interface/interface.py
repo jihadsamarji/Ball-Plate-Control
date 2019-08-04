@@ -136,6 +136,7 @@ def setRefWithMouse(mousePosition):   # set refX and refY based on the mousePosi
     if mousePosition.y > 10:
         refreshGraph()
         refX, refY = mousePosition.x, mousePosition.y
+        resetPID()
 
 
 def getMouseClickPosition(mousePosition):   # get mouse click position
@@ -240,9 +241,9 @@ def endProgam():        # function to close root window
 sliderHDefault = 15
 sliderSDefault = 40
 sliderVDefault = 40
-sliderCoefPDefault = 0.1
-sliderCoefIDefault = 0.001
-sliderCoefDDefault = 0.1
+sliderCoefPDefault = 0.035
+sliderCoefIDefault = 0.0
+sliderCoefDDefault = 0.015
 
 
 def resetSlider():  # function that reset the slider values to default
@@ -259,9 +260,11 @@ def donothing():    # function that does nothing, may be used for delay
 
 
 def resetPID():    # function that compact the plate
-    global totalErrorX, totalErrorY, prevIntegX, prevIntegY, prevDerivX, prevDerivY
+    global totalErrorX, totalErrorY, prevErrorX, prevErrorY, prevIntegX, prevIntegY, prevDerivX, prevDerivY
     totalErrorX = 0
     totalErrorY = 0
+    prevErrorX = 0
+    prevErrorY = 0
     prevIntegX = 0
     prevIntegY = 0
     prevDerivX = 0
@@ -369,7 +372,7 @@ totalErrorY = 0
 timeInterval = 1
 alpha, beta, prevAlpha, prevBeta = 0, 0, 0, 0
 omega = 0.1
-N = 10  #Derivative Coefficient
+N = 20  #Derivative Coefficient
 prevDerivX = 0 #previous derivative
 prevDerivY = 0 #previous derivative
 prevIntegX = 0
@@ -396,20 +399,17 @@ def PIDcontrol(ballPosX, ballPosY, prevBallPosX, prevBallPosY, refX, refY):     
     Kd = sliderCoefD.get()
 
     Ts = time.time() - delivery_time
-    #Kp = 0.02
-    #Ki = 0
-    #Kd = 0.01
 
     derivX = (prevBallPosX - ballPosX) / Ts
     derivY = (prevBallPosY - ballPosY) / Ts
-    Cix = prevIntegX + totalErrorX*Ki*Ts                    #Ki * totalErrorX
-    Ciy = prevIntegY + totalErrorY*Ki*Ts                    #Ki * totalErrorX
+    Cix = prevIntegX + errorX*Ki*Ts                    #Ki * totalErrorX
+    Ciy = prevIntegY + errorY*Ki*Ts                    #Ki * totalErrorX
 
 
 
 
-    Cdx = Kd * ((errorX - prevErrorX)/Ts) #Ts/(1+N*Ts)*(N*Kd*derivX + prevDerivX/Ts)
-    Cdy = Kd * ((errorY - prevErrorY)/Ts) #Ts/(1+N*Ts)*(N*Kd*derivY + prevDerivY/Ts)
+    Cdx =  (Kd*N*(errorX-prevErrorX)+prevDerivX)/(1+N*Ts)#Ts/(1+N*Ts)*(N*Kd*derivX + prevDerivX/Ts) #Kd * ((errorX - prevErrorX)/Ts)
+    Cdy = (Kd*N*(errorY-prevErrorY)+prevDerivY)/(1+N*Ts) #Ts/(1+N*Ts)*(N*Kd*derivY + prevDerivY/Ts) #Kd * ((errorY - prevErrorY)/Ts)
 
     Ix = Kp * errorX + Cix + Cdx
     Iy = Kp * errorY + Ciy + Cdy

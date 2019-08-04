@@ -32,14 +32,18 @@ file.write(firstline)
 
 maxAlpha = 149
 alpha = radians(maxAlpha/10)
-max_theta = arcsin(sin(alpha)*K)
+#max_theta = arcsin(sin(alpha)*K)
+max_theta = 180
 
 for alpha in range(-maxAlpha,maxAlpha+1):
     alpha = radians(alpha/10)
-    theta = arcsin(sin(alpha)*K) + pi/2
+    if alpha < 0 :
+            theta = arcsin(sin(alpha)*K) + pi/2
+    else :
+            theta = (arcsin(sin(alpha)*K) + pi/2)*0.995
     alpha = round(degrees(alpha),2)
-    theta = translate(degrees(theta),20,160,0,180)
-    theta = round(theta,0)
+    #theta = translate(degrees(theta),20,160,0,180)
+    theta = round(degrees(theta),0)
     separator = "|"
     data = str(alpha) + separator + str(int(theta)) + "\n"
     file.write(data)

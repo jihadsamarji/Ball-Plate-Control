@@ -7,26 +7,25 @@
 */
 
 
-#include <time.h>
+
 #include <Servo.h>
 
 Servo servoA;  // create servo object to control a servo
 Servo servoB;
 // twelve servo objects can be created on most boards
 
-float pos = 90;    // variable to store the servo position
-int angleB = 135;
+int angleA = 90;    // variable to store the servo position
+int angleB = 90;
 
 void setup() {
-  pos = map(pos,20,160,0,180);
-  //servoA.attach(9); 
-  servoB.attach(10);
-  delay(1000);
-  servoB.write(angleB); 
-  //servoA.write(pos);
-  //delay(6000);
-  //pos = map(96.8,20,160,0,180);
-  //servoA.write(pos);
+  //angleA = map(angleA,20,160,0,180);
+  //angleB = map(angleB,20,160,0,180);
+  servoA.attach(10,500,2600); 
+  servoB.attach(6,500,2600);
+  servoA.write(angleA);
+  servoB.write(angleB);
+
+
 }
 
 void loop() {
