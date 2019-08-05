@@ -78,7 +78,7 @@ def createPointsListEight(radius):      # create an array of 360 points to descr
         pointsListEight.append([radius * cos(radians(angle)) + 240, radius * sin(radians(angle)) + 240 - radius])
 
 
-createPointsListEight(80)   # create a pointsListEight list that defines a Eight patern of radius 80
+createPointsListEight(40)   # create a pointsListEight list that defines a Eight patern of radius 80
 
 drawCircleBool = False      # flag to draw Circle
 
@@ -91,7 +91,7 @@ def startDrawCircle():      # function triggered by Circle pattern Button as a T
     else:
         drawCircleBool = False
         refX, refY = 240, 240
-        sliderCoefP.set(sliderCoefPDefault)
+        #sliderCoefP.set(sliderCoefPDefault)
         BballDrawCircle["text"] = "moving the ball in circles"
 
 
@@ -106,7 +106,7 @@ def startDrawEight():       # function triggered by Eight pattern Button as a To
     else:
         drawEightBool = False
         refX, refY = 240, 240
-        sliderCoefP.set(sliderCoefPDefault)
+        #sliderCoefP.set(sliderCoefPDefault)
         BballDrawEight["text"] = "moving the ball in Eights"
 
 
@@ -116,14 +116,14 @@ pointCounter = 0    # a counter that will cover the whole 360 points in case of 
 def drawWithBall():     # function triggered after the startDrawCircle or startDrawEight
     global pointCounter, refX, refY
     if drawCircleBool == True:
-        sliderCoefP.set(15)
+        #sliderCoefP.set(15)
         if pointCounter >= len(pointsListCircle):
             pointCounter = 0
         point = pointsListCircle[pointCounter]
         refX, refY = point[0], point[1]
         pointCounter += 7
     if drawEightBool == True:
-        sliderCoefP.set(15)
+        #sliderCoefP.set(15)
         if pointCounter >= len(pointsListEight):
             pointCounter = 0
         point = pointsListEight[pointCounter]
@@ -136,6 +136,7 @@ def setRefWithMouse(mousePosition):   # set refX and refY based on the mousePosi
     if mousePosition.y > 10:
         refreshGraph()
         refX, refY = mousePosition.x, mousePosition.y
+        resetPID()
 
 
 def getMouseClickPosition(mousePosition):   # get mouse click position
@@ -240,9 +241,9 @@ def endProgam():        # function to close root window
 sliderHDefault = 15
 sliderSDefault = 40
 sliderVDefault = 40
-sliderCoefPDefault = 0.1
-sliderCoefIDefault = 0.001
-sliderCoefDDefault = 0.1
+sliderCoefPDefault = 0.035
+sliderCoefIDefault = 0.0
+sliderCoefDDefault = 0.015
 
 
 def resetSlider():  # function that reset the slider values to default
@@ -258,14 +259,16 @@ def donothing():    # function that does nothing, may be used for delay
     pass
 
 
-def compactPlate():    # function that compact the plate
-    if arduinoIsConnected == True:
-        if tkinter.messagebox.askokcancel("Warning", "Are you sure of compacting the plate ?"):
-            print("compacting the arms down")
-            ser.write(("compactPlate\n").encode())
-    else:
-        if tkinter.messagebox.askokcancel("Warning", "Arduino is not Connected"):
-            donothing()
+def resetPID():    # function that compact the plate
+    global totalErrorX, totalErrorY, prevErrorX, prevErrorY, prevIntegX, prevIntegY, prevDerivX, prevDerivY
+    totalErrorX = 0
+    totalErrorY = 0
+    prevErrorX = 0
+    prevErrorY = 0
+    prevIntegX = 0
+    prevIntegY = 0
+    prevDerivX = 0
+    prevDerivY = 0
 
 
 def releasePlate():     # function that releases the plate
@@ -290,40 +293,40 @@ def servosTest():   # function that tests the servos by sweeping
                 while alpha < max_alpha:
                     ser.write((str(dataDict[alpha]) + "," + str(dataDict[beta]) + "\n").encode())
                     ser.flush()
-                    time.sleep(0.02)
+                    #time.sleep(0.02)
                     alpha = round(alpha + 0.1, 1)
                     print(str(alpha) + "|" + str(dataDict[alpha]))
                 while alpha > -max_alpha:
                     ser.write((str(dataDict[alpha]) + "," + str(dataDict[beta]) + "\n").encode())
                     ser.flush()
-                    time.sleep(0.02)
+                    #time.sleep(0.02)
                     alpha = round(alpha - 0.1, 1)
                     print(str(alpha) + "|" + str(dataDict[alpha]))
                 while beta < max_alpha:
                     ser.write((str(dataDict[alpha]) + "," + str(dataDict[beta]) + "\n").encode())
                     ser.flush()
-                    time.sleep(0.02)
+                    #time.sleep(0.02)
                     beta = round(beta + 0.1, 1)
                     print(str(beta) + "|" + str(dataDict[beta]))
                 while beta > -max_alpha:
                     ser.write((str(dataDict[alpha]) + "," + str(dataDict[beta]) + "\n").encode())
                     ser.flush()
-                    time.sleep(0.02)
+                    #time.sleep(0.02)
                     beta = round(beta - 0.1, 1)
                     print(str(beta) + "|" + str(dataDict[beta]))
                 while alpha < max_alpha :
                     ser.write((str(dataDict[alpha]) + "," + str(dataDict[alpha]) + "\n").encode())
                     ser.flush()
-                    time.sleep(0.02)
+                    #time.sleep(0.02)
                     alpha = round(alpha + 0.1, 1)
                     print(str(alpha) + "|" + str(dataDict[alpha]))
                 while alpha > -max_alpha :
                     ser.write((str(dataDict[alpha]) + "," + str(dataDict[alpha]) + "\n").encode())
                     ser.flush()
-                    time.sleep(0.02)
+                    #time.sleep(0.02)
                     alpha = round(alpha - 0.1, 1)
                     print(str(alpha) + "|" + str(dataDict[alpha]))
-            time.sleep(1)
+            #time.sleep(5)
             ser.write((str(dataDict[0]) + "," + str(dataDict[0]) + "\n").encode())
     else:
         if tkinter.messagebox.askokcancel("Warning", "Arduino is not Connected"):
@@ -369,6 +372,14 @@ totalErrorY = 0
 timeInterval = 1
 alpha, beta, prevAlpha, prevBeta = 0, 0, 0, 0
 omega = 0.1
+N = 20  #Derivative Coefficient
+prevDerivX = 0 #previous derivative
+prevDerivY = 0 #previous derivative
+prevIntegX = 0
+prevIntegY = 0
+delivery_time = 0
+prevErrorX = 0
+prevErrorY = 0
 
 
 def PIDcontrol(ballPosX, ballPosY, prevBallPosX, prevBallPosY, refX, refY):     # PID controller
@@ -376,23 +387,38 @@ def PIDcontrol(ballPosX, ballPosY, prevBallPosX, prevBallPosY, refX, refY):     
     global totalErrorX, totalErrorY
     global alpha, beta, prevAlpha, prevBeta
     global startBalanceBall, arduinoIsConnected
+    global delivery_time, N
+    global prevDerivX, prevDerivY, prevIntegX, prevIntegY
+    global prevErrorX, prevErrorY
+
+    errorX = refX - ballPosX
+    errorY = refY - ballPosY
 
     Kp = sliderCoefP.get()
     Ki = sliderCoefI.get()
     Kd = sliderCoefD.get()
 
-    #Kp = 0.02
-    #Ki = 0
-    #Kd = 0.01
+    Ts = time.time() - delivery_time
 
-    Ix = Kp * (refX - ballPosX) + Ki * totalErrorX + Kd * (prevBallPosX - ballPosX)
-    Iy = Kp * (refY - ballPosY) + Ki * totalErrorY + Kd * (prevBallPosY - ballPosY)
+    derivX = (prevBallPosX - ballPosX) / Ts
+    derivY = (prevBallPosY - ballPosY) / Ts
+    Cix = prevIntegX + errorX*Ki*Ts                    #Ki * totalErrorX
+    Ciy = prevIntegY + errorY*Ki*Ts                    #Ki * totalErrorX
+
+
+
+
+    Cdx =  (Kd*N*(errorX-prevErrorX)+prevDerivX)/(1+N*Ts)#Ts/(1+N*Ts)*(N*Kd*derivX + prevDerivX/Ts) #Kd * ((errorX - prevErrorX)/Ts)
+    Cdy = (Kd*N*(errorY-prevErrorY)+prevDerivY)/(1+N*Ts) #Ts/(1+N*Ts)*(N*Kd*derivY + prevDerivY/Ts) #Kd * ((errorY - prevErrorY)/Ts)
+
+    Ix = Kp * errorX + Cix + Cdx
+    Iy = Kp * errorY + Ciy + Cdy
 
     #Ix = Kp * (refX - ballPosX)
     #Iy = Kp * (refX - ballPosY)
 
-    Ix = round(Ix , 1)
-    Iy = round(Iy , 1)
+    Ix = round(Ix, 1)
+    Iy = round(Iy, 1)
 
 
 
@@ -413,14 +439,19 @@ def PIDcontrol(ballPosX, ballPosY, prevBallPosX, prevBallPosY, refX, refY):     
 
     if arduinoIsConnected == True and startBalanceBall == True:
         ser.write((str(dataDict[Ix]) + "," + str(dataDict[-Iy]) + "\n").encode())
-
+        delivery_time = time.time()
     # print(alpha, beta)
-    print(Ix, Iy, alpha, beta, ballPosX, ballPosY, prevBallPosX, prevBallPosY, totalErrorX, totalErrorY)
+    print(Ts)
 
     if startBalanceBall == True:
-        totalErrorX += (refX - ballPosX)
-        totalErrorY += (refY - ballPosY)
-
+        totalErrorX += errorX
+        totalErrorY += errorY
+        prevDerivX = Cdx
+        prevDerivY = Cdy
+        prevIntegX = Cix
+        prevIntegY = Ciy
+        prevErrorX = errorX
+        prevErrorY = errorY
 
 prevX, prevY = 0, 0
 prevRefX, prevRefY = 0, 0
@@ -536,8 +567,8 @@ sliderV.pack()
 
 FrameServosControl = tk.LabelFrame(controllerWindow, text="Servos Control")
 FrameServosControl.place(x=20, y=315, width=380)
-BAbaissementPlate = tk.Button(FrameServosControl, text="Compact Arms", command=compactPlate)
-BAbaissementPlate.pack()
+BResetPID = tk.Button(FrameServosControl, text="Reset PID Memory", command=resetPID)
+BResetPID.pack()
 BElevationBras = tk.Button(FrameServosControl, text="Release Plate", command=releasePlate)
 BElevationBras.pack()
 BTesterServos = tk.Button(FrameServosControl, text="Test Servomotors", command=servosTest)
@@ -549,16 +580,16 @@ FramePIDCoef = tk.LabelFrame(controllerWindow, text="PID coefficients")
 FramePIDCoef.place(x=420, y=20, width=380)
 BShowGraph = tk.Button(FramePIDCoef, text="Plot on Graph", command=showGraphWindow)
 BShowGraph.pack()
-sliderCoefP = tk.Scale(FramePIDCoef, from_=0, to=0.1, orient="horizontal", label="P", length=350, tickinterval=3,
-                       resolution=0.01)
+sliderCoefP = tk.Scale(FramePIDCoef, from_=0, to=1, orient="horizontal", label="P", length=350, tickinterval=0.001,
+                       resolution=0.001)
 sliderCoefP.set(sliderCoefPDefault)
 sliderCoefP.pack()
-sliderCoefI = tk.Scale(FramePIDCoef, from_=0, to=0.1, orient="horizontal", label="I", length=350, tickinterval=0.2,
+sliderCoefI = tk.Scale(FramePIDCoef, from_=0, to=1, orient="horizontal", label="I", length=350, tickinterval=0.001,
                        resolution=0.001)
 sliderCoefI.set(sliderCoefIDefault)
 sliderCoefI.pack()
-sliderCoefD = tk.Scale(FramePIDCoef, from_=0, to=5, orient="horizontal", label="D", length=350, tickinterval=2,
-                       resolution=0.01)
+sliderCoefD = tk.Scale(FramePIDCoef, from_=0, to=5, orient="horizontal", label="D", length=350, tickinterval=0.001,
+                       resolution=0.001)
 sliderCoefD.set(sliderCoefDDefault)
 sliderCoefD.pack()
 
