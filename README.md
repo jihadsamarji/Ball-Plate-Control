@@ -62,6 +62,11 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 ## Acknowledgments
 
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
+I would first like to thank my thesis advisors and supervisors of the SAAS depart-ment at Université Libre de Bruxelles; Micheal KINNAERT, Laurent CATOIRE,Christoph MERTENS.
+The door to my supervisors was always open whenever I ran into problems or hada question about my research or writing.
+They consistently allowed this paper tobe my own work, but steered me in the right direction whenever I needed it.
+I would also like to thank the members of my dissertation committee - not only for their time and extreme patience, but for their intellectual contributions to mydevelopment as an Engineer.
+In Addition, I like to express my gratitude to the open source Community that helped a lot in overcoming software and computational challenges during the study.
+I must express my very profound gratitude to my parents, friends and to mygirlfriend for providing me with unfailing support and continuous encouragementthroughout my study and through the process of researching and writing thisthesis.
+This accomplishment would not have been possible without them.
+Thank you.
