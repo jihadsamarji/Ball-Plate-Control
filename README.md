@@ -11,10 +11,10 @@ These instructions will get you a copy of the project up and running on your loc
 ### Prerequisites
 
 things you need to install before running the code:
-- Arduino ide
+- Arduino IDE
 - Python 3.7
 - Python PiP
-- A Python ide (Pycharm is recommended)
+- Python IDE (Pycharm is recommended)
 
 Run the following commands in your command terminal after install "PIP"
 ```
