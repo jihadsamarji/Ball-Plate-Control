@@ -2,50 +2,38 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4b1d5d56-9629-45fc-956c-24cc999d926b" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../../CAD/Other Projects/Balancing Ball 3D Models/armBottom.stl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../CAD/Other Projects/Balancing Ball 3D Models/armTop.stl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../CAD/Other Projects/Balancing Ball 3D Models/cameraBottom.stl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../CAD/Other Projects/Balancing Ball 3D Models/cameraTop.stl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../CAD/Other Projects/Balancing Ball 3D Models/contour1Print1time..stl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../CAD/Other Projects/Balancing Ball 3D Models/contour2Print1time..stl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../CAD/Other Projects/Balancing Ball 3D Models/contour3Print1time..stl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../CAD/Other Projects/Balancing Ball 3D Models/contour4Print1time..stl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../CAD/Other Projects/Balancing Ball 3D Models/contour5Print1time.stl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../CAD/Other Projects/Balancing Ball 3D Models/inferieur.stl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../CAD/Other Projects/Balancing Ball 3D Models/interieur2Print1time.stl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../CAD/Other Projects/Balancing Ball 3D Models/interieur3Print1time.stl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../CAD/Other Projects/Balancing Ball 3D Models/interieurPrint1time.stl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../CAD/Other Projects/Balancing Ball 3D Models/joystick_connector_support.stl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../CAD/Other Projects/Balancing Ball 3D Models/outil.stl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../CAD/Other Projects/Balancing Ball 3D Models/plateau.stl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../CAD/Other Projects/Balancing Ball 3D Models/print1time.stl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../CAD/Other Projects/Balancing Ball 3D Models/print3times.stl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../CAD/Other Projects/Balancing Ball 3D Models/socleBottom.stl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../CAD/Other Projects/Balancing Ball 3D Models/socleTop.stl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../CAD/Other Projects/Balancing Ball 3D Models/superieur.stl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../CAD/Other Projects/SW/Assem final.SLDASM" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../CAD/Other Projects/SW/Ball.SLDPRT" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../CAD/Other Projects/SW/Ball3 end.SLDPRT" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../CAD/Other Projects/SW/Ball3 start.SLDPRT" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../CAD/Other Projects/SW/Box.SLDASM" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../CAD/Other Projects/SW/Hitec Servo Motor HS-311.SLDPRT" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../CAD/Other Projects/SW/Lid support.sldprt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../CAD/Other Projects/SW/Plate.SLDPRT" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../CAD/Other Projects/SW/Servo mount 2.SLDPRT" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../CAD/Other Projects/SW/Spline 2.SLDPRT" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../CAD/Other Projects/SW/Thumbs.db" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../CAD/Other Projects/SW/crank extender.SLDPRT" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../CAD/Other Projects/SW/holder.SLDPRT" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../CAD/Other Projects/SW/joystick cover.SLDPRT" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../CAD/Other Projects/SW/joystick support.SLDPRT" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../CAD/Other Projects/SW/joystick.SLDPRT" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../CAD/Other Projects/SW/snap socket.SLDPRT" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../CAD/Other Projects/SW/socket 2.SLDPRT" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Matlab &amp; Simulation/Ball_Plate_Simulation.slx" beforeDir="false" afterPath="$PROJECT_DIR$/../Matlab &amp; Simulation/Ball_Plate_Simulation.slx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Matlab &amp; Simulation/Ball_Plate_Simulation.slxc" beforeDir="false" afterPath="$PROJECT_DIR$/../Matlab &amp; Simulation/Ball_Plate_Simulation.slxc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Matlab &amp; Simulation/slprj/sim/varcache/Ball_Plate_Simulation/checksumOfCache.mat" beforeDir="false" afterPath="$PROJECT_DIR$/../Matlab &amp; Simulation/slprj/sim/varcache/Ball_Plate_Simulation/checksumOfCache.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Matlab &amp; Simulation/slprj/sim/varcache/Ball_Plate_Simulation/tmwinternal/simulink_cache.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Matlab &amp; Simulation/slprj/sim/varcache/Ball_Plate_Simulation/tmwinternal/simulink_cache.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Matlab &amp; Simulation/slprj/sim/varcache/Ball_Plate_Simulation/varInfo.mat" beforeDir="false" afterPath="$PROJECT_DIR$/../Matlab &amp; Simulation/slprj/sim/varcache/Ball_Plate_Simulation/varInfo.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../../.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Matlab &amp; Simulation/Ball_Plate_Simulation.slx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Matlab &amp; Simulation/Ball_Plate_Simulation.slxc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Matlab &amp; Simulation/Jihad2.slxc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Matlab &amp; Simulation/PD controllers_data.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Matlab &amp; Simulation/Pdaggressive.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Matlab &amp; Simulation/State_space.m" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Matlab &amp; Simulation/identified Impulse.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Matlab &amp; Simulation/identified Transferfunction.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Matlab &amp; Simulation/identified unit step.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Matlab &amp; Simulation/log_P22_D16_N20_C.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Matlab &amp; Simulation/matlab.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Matlab &amp; Simulation/simscape.slx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Matlab &amp; Simulation/simscape.slxc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Matlab &amp; Simulation/slcov_output/Ball_Plate_Simulation/Ball_Plate_Simulation.cvr" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Matlab &amp; Simulation/slcov_output/Ball_Plate_Simulation/Ball_Plate_Simulation_cvdata.cvt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Matlab &amp; Simulation/slcov_output/Ball_Plate_Simulation/active_filt.cvf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Matlab &amp; Simulation/slprj/sim/varcache/Ball_Plate_Simulation/checksumOfCache.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Matlab &amp; Simulation/slprj/sim/varcache/Ball_Plate_Simulation/tmwinternal/simulink_cache.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Matlab &amp; Simulation/slprj/sim/varcache/Ball_Plate_Simulation/varInfo.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Matlab &amp; Simulation/slprj/sim/varcache/Jihad2/checksumOfCache.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Matlab &amp; Simulation/slprj/sim/varcache/Jihad2/tmwinternal/simulink_cache.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Matlab &amp; Simulation/slprj/sim/varcache/Jihad2/varInfo.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Matlab &amp; Simulation/slprj/sim/varcache/simscape/checksumOfCache.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Matlab &amp; Simulation/slprj/sim/varcache/simscape/tmwinternal/simulink_cache.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Matlab &amp; Simulation/slprj/sim/varcache/simscape/varInfo.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Matlab &amp; Simulation/step/log_P10_D15_N20.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Matlab &amp; Simulation/step/log_P22_D16_N20.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Matlab &amp; Simulation/step/log_P25_D15_N20.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Matlab &amp; Simulation/step/log_P30_D20_N20.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Matlab &amp; Simulation/step/log_P35_D20_N20.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Matlab &amp; Simulation/test.m" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -124,7 +112,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="84" />
     <option name="y" value="24" />
     <option name="width" value="1752" />
