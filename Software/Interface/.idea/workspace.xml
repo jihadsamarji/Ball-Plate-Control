@@ -2,16 +2,47 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4b1d5d56-9629-45fc-956c-24cc999d926b" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../Arduino/Full_Program/Full_Program.ino" beforeDir="false" afterPath="$PROJECT_DIR$/../Arduino/Full_Program/Full_Program.ino" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Arduino/Servo Calibration/Calibrated Servos/Servo_Turnigy-4409MD.lnk/Servo_Turnigy-4409MD.lnk.ino" beforeDir="false" afterPath="$PROJECT_DIR$/../Arduino/Servo Calibration/Calibrated Servos/Servo_Turnigy-4409MD.lnk/Servo_Turnigy-4409MD.lnk.ino" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Arduino/Servo_tests/Servo1_sweep_test/Servo1_sweep_test.ino" beforeDir="false" afterPath="$PROJECT_DIR$/../Arduino/Servo_tests/Servo1_sweep_test/Servo1_sweep_test.ino" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/interface.py" beforeDir="false" afterPath="$PROJECT_DIR$/interface.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../LookupTable/data.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../LookupTable/data.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../LookupTable/solveEquation.py" beforeDir="false" afterPath="$PROJECT_DIR$/../LookupTable/solveEquation.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../CAD/Other Projects/Balancing Ball 3D Models/armBottom.stl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../CAD/Other Projects/Balancing Ball 3D Models/armTop.stl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../CAD/Other Projects/Balancing Ball 3D Models/cameraBottom.stl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../CAD/Other Projects/Balancing Ball 3D Models/cameraTop.stl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../CAD/Other Projects/Balancing Ball 3D Models/contour1Print1time..stl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../CAD/Other Projects/Balancing Ball 3D Models/contour2Print1time..stl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../CAD/Other Projects/Balancing Ball 3D Models/contour3Print1time..stl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../CAD/Other Projects/Balancing Ball 3D Models/contour4Print1time..stl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../CAD/Other Projects/Balancing Ball 3D Models/contour5Print1time.stl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../CAD/Other Projects/Balancing Ball 3D Models/inferieur.stl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../CAD/Other Projects/Balancing Ball 3D Models/interieur2Print1time.stl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../CAD/Other Projects/Balancing Ball 3D Models/interieur3Print1time.stl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../CAD/Other Projects/Balancing Ball 3D Models/interieurPrint1time.stl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../CAD/Other Projects/Balancing Ball 3D Models/joystick_connector_support.stl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../CAD/Other Projects/Balancing Ball 3D Models/outil.stl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../CAD/Other Projects/Balancing Ball 3D Models/plateau.stl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../CAD/Other Projects/Balancing Ball 3D Models/print1time.stl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../CAD/Other Projects/Balancing Ball 3D Models/print3times.stl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../CAD/Other Projects/Balancing Ball 3D Models/socleBottom.stl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../CAD/Other Projects/Balancing Ball 3D Models/socleTop.stl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../CAD/Other Projects/Balancing Ball 3D Models/superieur.stl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../CAD/Other Projects/SW/Assem final.SLDASM" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../CAD/Other Projects/SW/Ball.SLDPRT" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../CAD/Other Projects/SW/Ball3 end.SLDPRT" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../CAD/Other Projects/SW/Ball3 start.SLDPRT" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../CAD/Other Projects/SW/Box.SLDASM" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../CAD/Other Projects/SW/Hitec Servo Motor HS-311.SLDPRT" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../CAD/Other Projects/SW/Lid support.sldprt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../CAD/Other Projects/SW/Plate.SLDPRT" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../CAD/Other Projects/SW/Servo mount 2.SLDPRT" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../CAD/Other Projects/SW/Spline 2.SLDPRT" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../CAD/Other Projects/SW/Thumbs.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../CAD/Other Projects/SW/crank extender.SLDPRT" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../CAD/Other Projects/SW/holder.SLDPRT" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../CAD/Other Projects/SW/joystick cover.SLDPRT" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../CAD/Other Projects/SW/joystick support.SLDPRT" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../CAD/Other Projects/SW/joystick.SLDPRT" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../CAD/Other Projects/SW/snap socket.SLDPRT" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../CAD/Other Projects/SW/socket 2.SLDPRT" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../Matlab &amp; Simulation/Ball_Plate_Simulation.slx" beforeDir="false" afterPath="$PROJECT_DIR$/../Matlab &amp; Simulation/Ball_Plate_Simulation.slx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Matlab &amp; Simulation/Ball_Plate_Simulation.slxc" beforeDir="false" afterPath="$PROJECT_DIR$/../Matlab &amp; Simulation/Ball_Plate_Simulation.slxc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Matlab &amp; Simulation/State_space.m" beforeDir="false" afterPath="$PROJECT_DIR$/../Matlab &amp; Simulation/State_space.m" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Matlab &amp; Simulation/slprj/sim/varcache/Ball_Plate_Simulation/checksumOfCache.mat" beforeDir="false" afterPath="$PROJECT_DIR$/../Matlab &amp; Simulation/slprj/sim/varcache/Ball_Plate_Simulation/checksumOfCache.mat" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Matlab &amp; Simulation/slprj/sim/varcache/Ball_Plate_Simulation/tmwinternal/simulink_cache.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Matlab &amp; Simulation/slprj/sim/varcache/Ball_Plate_Simulation/tmwinternal/simulink_cache.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Matlab &amp; Simulation/slprj/sim/varcache/Ball_Plate_Simulation/varInfo.mat" beforeDir="false" afterPath="$PROJECT_DIR$/../Matlab &amp; Simulation/slprj/sim/varcache/Ball_Plate_Simulation/varInfo.mat" afterDir="false" />
@@ -30,8 +61,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/interface.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="209">
-              <caret line="375" column="35" lean-forward="true" selection-start-line="375" selection-start-column="35" selection-end-line="375" selection-end-column="35" />
+            <state relative-caret-position="-539">
+              <caret line="331" column="35" selection-start-line="331" selection-start-column="35" selection-end-line="331" selection-end-column="35" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
               </folding>
@@ -93,7 +124,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="84" />
     <option name="y" value="24" />
     <option name="width" value="1752" />
@@ -189,6 +220,9 @@
       <module name="Interface" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="true" />
@@ -331,8 +365,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/interface.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="375" column="35" lean-forward="true" selection-start-line="375" selection-start-column="35" selection-end-line="375" selection-end-column="35" />
+        <state relative-caret-position="-539">
+          <caret line="331" column="35" selection-start-line="331" selection-start-column="35" selection-end-line="331" selection-end-column="35" />
           <folding>
             <element signature="e#0#10#0" expanded="true" />
           </folding>

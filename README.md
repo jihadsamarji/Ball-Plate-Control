@@ -12,64 +12,39 @@ These instructions will get you a copy of the project up and running on your loc
 
 things you need to install before running the code:
 - Arduino ide
-- Python 2.7
-- opencv 2
+- Python 3.7
+- Python PiP
+- A Python ide (Pycharm is recommended)
 
+Run the following commands in your command terminal after install "PIP"
 ```
-Give examples
-```
-
-### Installing
-
-A step by step series of examples that tell you how to get a development env running
-
-Say what the step will be
-
-```
-Give the example
-```
-
-And repeat
-
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo
-
-## Running the tests
-
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
+pip install opencv-python 3.4.5.20
+pip install Django
+pip install Pillow
+pip install image
+pip install imutils
+pip install numpy
+pip install pyserial
+pip install pytz
+pip install setuptools
+pip install sqlparse
+pip install wheel
 ```
 
 ## Deployment
 
-Add additional notes about how to deploy this on a live system
+- Make sure you run the solveequation.py code first to generate the dictionary file.
+- Then place the dictionary file in the same directory of the interface.py code.
+- Connect an Arduino and upload the arduino code (Full_Program.ino) using the arduino IDE
+- Make sure you have a Camera attached on your system.
+- Run the code interface.py . 
 
-## Built With
-
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+## Simulation Files
+The simulation files are found in the (Software/Matlab & Simulation/)
 
 ## Contributing
 
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
+Please Contact me on jmz_mmz@hotmail.com for any contribution requests.
 
 ## Versioning
 
