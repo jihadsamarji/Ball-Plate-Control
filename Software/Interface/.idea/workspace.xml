@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4b1d5d56-9629-45fc-956c-24cc999d926b" name="Default Changelist" comment="">
+<<<<<<< Updated upstream
       <change beforePath="$PROJECT_DIR$/../../.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../../.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Matlab &amp; Simulation/Ball_Plate_Simulation.slx" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../Matlab &amp; Simulation/Ball_Plate_Simulation.slxc" beforeDir="false" />
@@ -34,6 +35,23 @@
       <change beforePath="$PROJECT_DIR$/../Matlab &amp; Simulation/step/log_P30_D20_N20.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../Matlab &amp; Simulation/step/log_P35_D20_N20.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../Matlab &amp; Simulation/test.m" beforeDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/../../Pictures/identification/Ana-Aprox.png" beforeDir="false" afterPath="$PROJECT_DIR$/../../Pictures/identification/Ana-Aprox.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Presentation/Questions.pptx" beforeDir="false" afterPath="$PROJECT_DIR$/../../Presentation/Questions.pptx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Arduino/Full_Program_Touchscreen/Full_Program_Touchscreen.lnk/Full_Program_Touchscreen.lnk.ino" beforeDir="false" afterPath="$PROJECT_DIR$/../Arduino/Full_Program_Touchscreen/Full_Program_Touchscreen.lnk/Full_Program_Touchscreen.lnk.ino" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Arduino/RTouchScreen/RTouchScreen.ino" beforeDir="false" afterPath="$PROJECT_DIR$/../Arduino/RTouchScreen/RTouchScreen.ino" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Arduino/Servo Calibration/Calibrated Servos/Servo_Turnigy-4409MD.lnk/Servo_Turnigy-4409MD.lnk.ino" beforeDir="false" afterPath="$PROJECT_DIR$/../Arduino/Servo Calibration/Calibrated Servos/Servo_Turnigy-4409MD.lnk/Servo_Turnigy-4409MD.lnk.ino" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/interface.py" beforeDir="false" afterPath="$PROJECT_DIR$/interface.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LookupTable/data.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../LookupTable/data.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LookupTable/solveEquation.py" beforeDir="false" afterPath="$PROJECT_DIR$/../LookupTable/solveEquation.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Matlab &amp; Simulation/Ball_Plate_Simulation.slx" beforeDir="false" afterPath="$PROJECT_DIR$/../Matlab &amp; Simulation/Ball_Plate_Simulation.slx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Matlab &amp; Simulation/Ball_Plate_Simulation.slxc" beforeDir="false" afterPath="$PROJECT_DIR$/../Matlab &amp; Simulation/Ball_Plate_Simulation.slxc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Matlab &amp; Simulation/slprj/sim/varcache/Ball_Plate_Simulation/checksumOfCache.mat" beforeDir="false" afterPath="$PROJECT_DIR$/../Matlab &amp; Simulation/slprj/sim/varcache/Ball_Plate_Simulation/checksumOfCache.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Matlab &amp; Simulation/slprj/sim/varcache/Ball_Plate_Simulation/tmwinternal/simulink_cache.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Matlab &amp; Simulation/slprj/sim/varcache/Ball_Plate_Simulation/tmwinternal/simulink_cache.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Matlab &amp; Simulation/slprj/sim/varcache/Ball_Plate_Simulation/varInfo.mat" beforeDir="false" afterPath="$PROJECT_DIR$/../Matlab &amp; Simulation/slprj/sim/varcache/Ball_Plate_Simulation/varInfo.mat" afterDir="false" />
+>>>>>>> Stashed changes
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -49,8 +67,13 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/interface.py">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< Updated upstream
             <state relative-caret-position="-539">
               <caret line="331" column="35" selection-start-line="331" selection-start-column="35" selection-end-line="331" selection-end-column="35" />
+=======
+            <state relative-caret-position="96">
+              <caret line="442" selection-start-line="442" selection-end-line="442" />
+>>>>>>> Stashed changes
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
               </folding>
@@ -69,36 +92,36 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>N</find>
-      <find>filt</find>
-      <find>compac</find>
-      <find>BAbaissementPlate</find>
-      <find>FPS</find>
-      <find>start</find>
-      <find>samplin</find>
-      <find>Ts</find>
+      <find>for i</find>
+      <find>sliderRadius</find>
+      <find>sleep</find>
+      <find>radiusUpdate</find>
+      <find>drawWith</find>
+      <find>sliderRad</find>
+      <find>plot</find>
+      <find>showGraphPosition</find>
+      <find>refX</find>
+      <find>prevRefX</find>
+      <find>start_timeF</find>
+      <find>interval</find>
       <find>timeInterval</find>
-      <find>Eight</find>
-      <find>draw</find>
-      <find>radius</find>
-      <find>PID</find>
-      <find>set</find>
-      <find>ref</find>
+      <find>480</find>
+      <find>t - 3</find>
+      <find>Ts</find>
+      <find>paintGra</find>
+      <find>Reset</find>
+      <find>Window</find>
       <find>setRef</find>
-      <find>Button-</find>
-      <find>Button</find>
-      <find>getMouseClick</find>
-      <find>BReset</find>
-      <find>getMouse</find>
-      <find>resetPID</find>
-      <find>crop</find>
-      <find>cr</find>
-      <find>filter</find>
-      <find>default</find>
+      <find>Default</find>
+      <find>setRefW</find>
       <find>N =</find>
-      <find>ballPos</find>
-      <find>PIDcontrol</find>
-      <find>N =</find>
+      <find>reset</find>
+      <find>PID</find>
+      <find>omega</find>
+      <find>log</find>
+      <find>graph</find>
+      <find>print</find>
+      <find>totalError</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -108,6 +131,7 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/Gettime.py" />
+        <option value="$PROJECT_DIR$/../LookupTable/solveEquation.py" />
         <option value="$PROJECT_DIR$/interface.py" />
       </list>
     </option>
@@ -277,7 +301,7 @@
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="bottom" id="Terminal" order="11" weight="0.3280142" />
-      <window_info anchor="bottom" id="Python Console" order="12" weight="0.3280142" />
+      <window_info active="true" anchor="bottom" id="Python Console" order="12" visible="true" weight="0.3280142" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -308,13 +332,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37/Lib/tkinter/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="97">
-          <caret line="559" selection-start-line="559" selection-end-line="559" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37/Lib/codecs.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="97">
@@ -332,15 +349,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../LookupTable/solveEquation.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#19#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Gettime.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="147">
@@ -351,10 +359,39 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/pydevd.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="104">
+          <caret line="1751" selection-start-line="1751" selection-end-line="1751" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37/Lib/tkinter/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="118">
+          <caret line="748" selection-start-line="748" selection-end-line="748" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../LookupTable/solveEquation.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="44" column="8" selection-start-line="44" selection-start-column="8" selection-end-line="44" selection-end-column="8" />
+          <folding>
+            <element signature="e#0#19#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/interface.py">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< Updated upstream
         <state relative-caret-position="-539">
           <caret line="331" column="35" selection-start-line="331" selection-start-column="35" selection-end-line="331" selection-end-column="35" />
+=======
+        <state relative-caret-position="96">
+          <caret line="442" selection-start-line="442" selection-end-line="442" />
+>>>>>>> Stashed changes
           <folding>
             <element signature="e#0#10#0" expanded="true" />
           </folding>

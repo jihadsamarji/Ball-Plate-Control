@@ -35,9 +35,9 @@ for i in range(1, len(lines)):  # for loop to go over the lines list and feed it
     dataDict[float(alpha)] = float(theta)
 
 controllerWindow = tk.Tk()  # initializes this tk interpreter and creates the root window
-controllerWindow.title("Control Window")    # define title of the root window
+controllerWindow.title("2DOF Ball-Plate Control Window ")    # define title of the root window
 controllerWindow.geometry("820x500")    # define size of the root window
-controllerWindow["bg"] = "grey"     # define the background color of the root window
+controllerWindow["bg"] = "lightgrey"     # define the background color of the root window
 controllerWindow.resizable(0, 0)    # define if the root window is resizable or not for Vertical and horizontal
 
 videoWindow = tk.Toplevel(controllerWindow)     # a new window derived from the root window "controllerwindow"
@@ -50,49 +50,57 @@ videoWindow.withdraw()  # hide the window
 graphWindow = tk.Toplevel(controllerWindow)     # a new window derived from the root window "graphwindow"
 graphWindow.title("Position in function of time")   # define window title
 graphWindow.resizable(0, 0)     # define if resizable or not
-graphCanvas = tk.Canvas(graphWindow, width=camHeight + 210, height=camHeight)       # create a canvas widget in graphwindow
+graphCanvas = tk.Canvas(graphWindow, width=500+200, height=camHeight)       # create a canvas widget in graphwindow
 graphCanvas.pack()      # pack the canvas widget
 graphWindow.withdraw()  # hide the graphwindow
 
 pointsListCircle = []   # create an empty list to put points refinates that describes a circle patern
 
 
-def createPointsListCircle(radius):     # create an array of 360 points to describe a whole circle with the argument as radius
+def createPointsListCircle():     # create an array of 360 points to describe a whole circle with the argument as radius
     global pointsListCircle
+    pointsListCircle = []
     for angle in range(0, 360):
         angle = angle - 90
-        pointsListCircle.append([radius * cos(radians(angle)) + 240, radius * sin(radians(angle)) + 240])
+        pointsListCircle.append([sliderRadius.get() * cos(radians(angle)) + 240, sliderRadius.get() * sin(radians(angle)) + 240])
 
 
-createPointsListCircle(60)     # create a pointsListCircle list that defines a circle of radius 150
 
 pointsListEight = []        # create an empty list to put points refinates that describes an Eight patern
 
 
-def createPointsListEight(radius):      # create an array of 360 points to describe an Eight shape with the argument as radius
+def createPointsListEight():      # create an array of 360 points to describe an Eight shape with the argument as radius
     global pointsListEight
+    pointsListEight = []
     for angle in range(270, 270 + 360):
-        pointsListEight.append([radius * cos(radians(angle)) + 240, radius * sin(radians(angle)) + 240 + radius])
+        pointsListEight.append([sliderRadius.get() * cos(radians(angle)) + 240, sliderRadius.get() * sin(radians(angle)) + 240 + sliderRadius.get()])
     for angle in range(360, 0, -1):
         angle = angle + 90
-        pointsListEight.append([radius * cos(radians(angle)) + 240, radius * sin(radians(angle)) + 240 - radius])
+        pointsListEight.append([sliderRadius.get() * cos(radians(angle)) + 240, sliderRadius.get() * sin(radians(angle)) + 240 - sliderRadius.get()])
 
 
-createPointsListEight(40)   # create a pointsListEight list that defines a Eight patern of radius 80
 
 drawCircleBool = False      # flag to draw Circle
 
 
-def startDrawCircle():      # function triggered by Circle pattern Button as a Toggle
+def startDrawCircle():
+    # function triggered by Circle pattern Button as a Toggle
+    createPointsListCircle()
     global drawCircleBool, drawEightBool, refX, refY
     if drawCircleBool == False:
         drawCircleBool = True
-        BballDrawCircle["text"] = "Centering the ball"
+        BballDrawCircle["text"] = "Disable Circle Trajectory"
     else:
         drawCircleBool = False
         refX, refY = 240, 240
         #sliderCoefP.set(sliderCoefPDefault)
-        BballDrawCircle["text"] = "moving the ball in circles"
+        BballDrawCircle["text"] = "Enable Circle Trajectory"
+    resetPID()
+
+def radiusUpdate(self):
+    createPointsListCircle()
+    createPointsListEight()
+
 
 
 drawEightBool = False
@@ -100,14 +108,16 @@ drawEightBool = False
 
 def startDrawEight():       # function triggered by Eight pattern Button as a Toggle
     global drawEightBool, drawCircleBool, refX, refY
+    createPointsListEight()
     if drawEightBool == False:
         drawEightBool = True
-        BballDrawEight["text"] = "Centering the ball"
+        BballDrawEight["text"] = "Disable Eight Trajectory"
     else:
         drawEightBool = False
         refX, refY = 240, 240
         #sliderCoefP.set(sliderCoefPDefault)
-        BballDrawEight["text"] = "moving the ball in Eights"
+        BballDrawEight["text"] = "Enable Eight Trajectory"
+    resetPID()
 
 
 pointCounter = 0    # a counter that will cover the whole 360 points in case of draw circle or eight
@@ -121,14 +131,14 @@ def drawWithBall():     # function triggered after the startDrawCircle or startD
             pointCounter = 0
         point = pointsListCircle[pointCounter]
         refX, refY = point[0], point[1]
-        pointCounter += 7
+        pointCounter += sliderSpeed.get()
     if drawEightBool == True:
         #sliderCoefP.set(15)
         if pointCounter >= len(pointsListEight):
             pointCounter = 0
         point = pointsListEight[pointCounter]
         refX, refY = point[0], point[1]
-        pointCounter += 7
+        pointCounter += sliderSpeed.get()
 
 
 def setRefWithMouse(mousePosition):   # set refX and refY based on the mousePosition, mousePosition is the realtime position of the mouse not a saved variable
@@ -138,6 +148,10 @@ def setRefWithMouse(mousePosition):   # set refX and refY based on the mousePosi
         refX, refY = mousePosition.x, mousePosition.y
         resetPID()
 
+def setRefWithButton():   # set refX and refY based on the mousePosition, mousePosition is the realtime position of the mouse not a saved variable
+    global refX, refY
+    refX, refY = sliderRefX.get(), sliderRefY.get()
+    resetPID()
 
 def getMouseClickPosition(mousePosition):   # get mouse click position
     global mouseX, mouseY
@@ -193,37 +207,64 @@ def showGraphWindow():  # function that toggles the Graph window and update the 
         BShowGraph["text"] = "Show Plot"
 
 
-t = 480     # time variable for the plotting and initialize at 480 for a good visualization
+t = 500     # time variable for the plotting and initialize at 480 for a good visualization
 refY = 240    # reference refinate Y
 refX = 240    # reference refinate X
+Ts = 0
 
+logBool = 0
+logfile = open("log.txt", "w")
+
+def startLog():
+    global  logBool
+    #logfile = open("log.txt", "w")  # create file
+    #firstline = "Time|PosX|RefX\n"
+    #logfile.write(firstline)
+    logBool = 1
 
 def paintGraph():   # function to plot in realtime the graphWindow
-    global t, refY, x, y, prevX, prevY, alpha, prevAlpha
-    global showGraphPositionX, showGraphPositionY, showGraphAlpha
+    global t, refX, refY, x, y, prevX, Ts, prevY, alpha, prevAlpha
+    global showGraphPositionX, showGraphPositionY, showGraphAlpha , logBool, logfile
     if showGraph == True:
+        t += Ts * 100
         graphWindow.deiconify()
         if showGraphPositionX.get() == 1:
-            graphCanvas.create_line(t - 3, prevX, t, x, fill="#b20000", width=2)
+            graphCanvas.create_line(t - Ts*100, prevX, t, x, fill="#b20000", width=2)
+            graphCanvas.create_line(t - Ts*100, prevRefX, t, refX, fill="#ff7777", width=2)
+
+        if logBool == 1:
+            log = str(round(t,2)) + " " + str(round(x,2)) + " " + str(refX) + "\n"
+            logfile.write(log)
+
         if showGraphPositionY.get() == 1:
-            graphCanvas.create_line(t - 3, prevY, t, y, fill="#0069b5", width=2)
+            graphCanvas.create_line(t - Ts*100, prevY, t, y, fill="#0069b5", width=2)
+            graphCanvas.create_line(t - Ts*100, prevRefY, t, refY, fill="#6f91f7", width=2)
         if showGraphAlpha.get() == 1:
-            graphCanvas.create_line(t - 3, 240 - prevAlpha * 3, t, 240 - alpha * 3, fill="#8f0caf", width=2)
-        if t >= 480:
+            graphCanvas.create_line(t - Ts*100, 240 - prevAlpha * 3, t, 240 - alpha * 3, fill="#8f0caf", width=2)
+        if t >= 500:
             t = 0
             graphCanvas.delete("all")
-            graphCanvas.create_line(3, 3, 480, 3, fill="black", width=3)
-            graphCanvas.create_line(3, 480, 480, 480, fill="black", width=3)
-            graphCanvas.create_line(3, 3, 3, 480, fill="black", width=3)
-            graphCanvas.create_line(480, 3, 480, 480, fill="black", width=3)
+            if logBool == 1:
+                logBool = 0
+                logfile.close()
+            #graphCanvas.create_line(0, 240, 500, 240, fill="black", width=1)
+            #graphCanvas.create_line(250, 0, 250, 500, fill="black", width=1)
+            for i in range(4):
+                graphCanvas.create_line(0, 120*(i+1), 500, 120*(i+1), fill="black", width=1)
+                graphCanvas.create_line(100*(i+1), 0, 100*(i+1), 480, fill="black", width=1)
+
+            graphCanvas.create_line(3, 3, 500, 3, fill="black", width=3)
+            graphCanvas.create_line(3, 500, 500, 500, fill="black", width=3)
+            graphCanvas.create_line(3, 3, 3, 500, fill="black", width=3)
+            graphCanvas.create_line(500, 3, 500, 500, fill="black", width=3)
             graphCanvas.create_line(550, 32, 740, 32, fill="#b20000", width=5)
             graphCanvas.create_line(550, 53, 740, 53, fill="#0069b5", width=5)
             graphCanvas.create_line(550, 73, 740, 73, fill="#8f0caf", width=5)
-            if showGraphPositionX.get() == 1:
-                graphCanvas.create_line(3, refX, 480, refX, fill="#ff7777", width=2)
-            if showGraphPositionY.get() == 1:
-                graphCanvas.create_line(3, refY, 480, refY, fill="#6f91f7", width=2)
-        t += 3
+            #if showGraphPositionX.get() == 1:
+             #   graphCanvas.create_line(3, refX, 480, refX, fill="#ff7777", width=2)
+            #if showGraphPositionY.get() == 1:
+             #   graphCanvas.create_line(3, refY, 480, refY, fill="#6f91f7", width=2)
+
     else:
         graphWindow.withdraw()
 
@@ -244,7 +285,10 @@ sliderVDefault = 40
 sliderCoefPDefault = 0.035
 sliderCoefIDefault = 0.0
 sliderCoefDDefault = 0.015
-
+sliderRadiusDefault = 10
+sliderSpeedDefault = 10
+sliderRefXDefault = camWidth/2
+sliderRefYDefault = camHeight/2
 
 def resetSlider():  # function that reset the slider values to default
     sliderH.set(sliderHDefault)
@@ -371,7 +415,7 @@ totalErrorX = 0
 totalErrorY = 0
 timeInterval = 1
 alpha, beta, prevAlpha, prevBeta = 0, 0, 0, 0
-omega = 0.1
+
 N = 20  #Derivative Coefficient
 prevDerivX = 0 #previous derivative
 prevDerivY = 0 #previous derivative
@@ -383,33 +427,45 @@ prevErrorY = 0
 
 
 def PIDcontrol(ballPosX, ballPosY, prevBallPosX, prevBallPosY, refX, refY):     # PID controller
-    global omega
     global totalErrorX, totalErrorY
     global alpha, beta, prevAlpha, prevBeta
     global startBalanceBall, arduinoIsConnected
-    global delivery_time, N
+    global Ts, delivery_time, N
     global prevDerivX, prevDerivY, prevIntegX, prevIntegY
     global prevErrorX, prevErrorY
 
+    Ts = time.time() - delivery_time    #sampling time
+    delivery_time = time.time()
+    print(Ts)
+
     errorX = refX - ballPosX
     errorY = refY - ballPosY
+
 
     Kp = sliderCoefP.get()
     Ki = sliderCoefI.get()
     Kd = sliderCoefD.get()
 
-    Ts = time.time() - delivery_time
-
-    derivX = (prevBallPosX - ballPosX) / Ts
-    derivY = (prevBallPosY - ballPosY) / Ts
-    Cix = prevIntegX + errorX*Ki*Ts                    #Ki * totalErrorX
-    Ciy = prevIntegY + errorY*Ki*Ts                    #Ki * totalErrorX
 
 
+    try:
+        derivX = (prevBallPosX - ballPosX) / Ts
+    except ZeroDivisionError:
+        derivX = 0
+
+    try:
+        derivY = (prevBallPosY - ballPosY) / Ts
+    except ZeroDivisionError:
+        derivY = 0
+
+    Cix = Ki * totalErrorX #prevIntegX + errorX*Ki*Ts                    #Ki * totalErrorX
+    Ciy = Ki * totalErrorY #prevIntegY + errorY*Ki*Ts                    #Ki * totalErrorX
 
 
-    Cdx =  (Kd*N*(errorX-prevErrorX)+prevDerivX)/(1+N*Ts)#Ts/(1+N*Ts)*(N*Kd*derivX + prevDerivX/Ts) #Kd * ((errorX - prevErrorX)/Ts)
-    Cdy = (Kd*N*(errorY-prevErrorY)+prevDerivY)/(1+N*Ts) #Ts/(1+N*Ts)*(N*Kd*derivY + prevDerivY/Ts) #Kd * ((errorY - prevErrorY)/Ts)
+
+
+    Cdx =  Ts/(1+N*Ts)*(N*Kd*derivX + prevDerivX/Ts) #(Kd*N*(errorX-prevErrorX)+prevDerivX)/(1+N*Ts)# #Kd * ((errorX - prevErrorX)/Ts)
+    Cdy =  Ts/(1+N*Ts)*(N*Kd*derivY + prevDerivY/Ts) #(Kd*N*(errorY-prevErrorY)+prevDerivY)/(1+N*Ts) # #Kd * ((errorY - prevErrorY)/Ts)
 
     Ix = Kp * errorX + Cix + Cdx
     Iy = Kp * errorY + Ciy + Cdy
@@ -431,21 +487,12 @@ def PIDcontrol(ballPosX, ballPosY, prevBallPosX, prevBallPosY, refX, refY):     
     elif Iy < - max_alpha:
         Iy = - max_alpha
 
-    #alpha = prevAlpha * omega + (1 - omega) * alpha
-    #beta = prevBeta * omega + (1 - omega) * beta
-
-    #alpha = round(round(alpha / 0.1) * 0.1, -int(floor(log10(0.1))))  ## permet d'arrondire avec 0.1 de precision
-    #beta = round(round(beta / 0.1) * 0.1, -int(floor(log10(0.1))))
+    print(totalErrorX)
 
     if arduinoIsConnected == True and startBalanceBall == True:
         ser.write((str(dataDict[Ix]) + "," + str(dataDict[-Iy]) + "\n").encode())
-        delivery_time = time.time()
-    # print(alpha, beta)
-    print(Ts)
 
     if startBalanceBall == True:
-        totalErrorX += errorX
-        totalErrorY += errorY
         prevDerivX = Cdx
         prevDerivY = Cdy
         prevIntegX = Cix
@@ -527,8 +574,8 @@ def main():     # declaring the main function of the program
     lmain.after(5, main)
 
     drawWithBall()
-    if prevRefX != refX or prevRefY != refY:
-        totalErrorX, totalErrorY = 0, 0
+    #if prevRefX != refX or prevRefY != refY:
+    #    totalErrorX, totalErrorY = 0, 0
 
     paintGraph()
     prevX, prevY = int(x), int(y)
@@ -536,10 +583,10 @@ def main():     # declaring the main function of the program
     prevAlpha = alpha
     prevBeta = beta
 
-    try:
-        print("FPS: ", 1.0 / (time.time() - start_timeFPS))
-    except ZeroDivisionError:
-        print("FPS: inf")
+    #try:
+    #    print("FPS: ", 1.0 / (time.time() - start_timeFPS))
+    #except ZeroDivisionError:
+    #    print("FPS: inf")
 
 
 FrameVideoControl = tk.LabelFrame(controllerWindow, text="Video Control")
@@ -580,46 +627,68 @@ FramePIDCoef = tk.LabelFrame(controllerWindow, text="PID coefficients")
 FramePIDCoef.place(x=420, y=20, width=380)
 BShowGraph = tk.Button(FramePIDCoef, text="Plot on Graph", command=showGraphWindow)
 BShowGraph.pack()
-sliderCoefP = tk.Scale(FramePIDCoef, from_=0, to=1, orient="horizontal", label="P", length=350, tickinterval=0.001,
+sliderCoefP = tk.Scale(FramePIDCoef, from_=0, to=0.1, orient="horizontal", label="P", length=350, tickinterval=0.01,
                        resolution=0.001)
 sliderCoefP.set(sliderCoefPDefault)
 sliderCoefP.pack()
-sliderCoefI = tk.Scale(FramePIDCoef, from_=0, to=1, orient="horizontal", label="I", length=350, tickinterval=0.001,
+sliderCoefI = tk.Scale(FramePIDCoef, from_=0, to=0.1, orient="horizontal", label="I", length=350, tickinterval=0.01,
                        resolution=0.001)
 sliderCoefI.set(sliderCoefIDefault)
 sliderCoefI.pack()
-sliderCoefD = tk.Scale(FramePIDCoef, from_=0, to=5, orient="horizontal", label="D", length=350, tickinterval=0.001,
+sliderCoefD = tk.Scale(FramePIDCoef, from_=0, to=0.1, orient="horizontal", label="D", length=350, tickinterval=0.01,
                        resolution=0.001)
 sliderCoefD.set(sliderCoefDDefault)
 sliderCoefD.pack()
 
 FrameBallControl = tk.LabelFrame(controllerWindow, text="Ball Control")
-FrameBallControl.place(x=420, y=315, width=380, height=132)
-BballDrawCircle = tk.Button(FrameBallControl, text="move the Ball into circle trajectory", command=startDrawCircle)
-BballDrawCircle.pack()
-BballDrawEight = tk.Button(FrameBallControl, text="move the Ball in Eight trajectory", command=startDrawEight)
-BballDrawEight.pack()
+FrameBallControl.place(x=420, y=315, width=380, height=180)
+
+sliderRadius = tk.Scale(FrameBallControl, from_=0, to=300, orient="horizontal", label="Radius", length=350, tickinterval=50,
+                       resolution=1, command=radiusUpdate)
+sliderRadius.set(sliderRadiusDefault)
+sliderRadius.pack()
+sliderSpeed = tk.Scale(FrameBallControl, from_=0, to=20, orient="horizontal", label="Speed", length=350, tickinterval=1,
+                       resolution=1)
+sliderSpeed.set(sliderSpeedDefault)
+sliderSpeed.pack()
+BballDrawCircle = tk.Button(FrameBallControl, text="Enable Circle Trajectory", command=startDrawCircle)
+BballDrawCircle.place(x=70, y= -5)
+BballDrawEight = tk.Button(FrameBallControl, text="Enable Eight Trajectory", command=startDrawEight)
+BballDrawEight.place(x=220, y= -5)
 
 label = tk.Label(controllerWindow, text="Arduino disconnected  ", fg="red", anchor="ne")
 label.pack(fill="both")
 BReset = tk.Button(controllerWindow, text="Reset", command=resetSlider)
 BReset.place(x=20, y=460)
 BConnect = tk.Button(controllerWindow, text="Connect", command=connectArduino, background="white")
-BConnect.place(x=100, y=460)
+BConnect.place(x=70, y=460)
 BQuit = tk.Button(controllerWindow, text="Quit", command=endProgam)
-BQuit.place(x=730, y=460)
+BQuit.place(x=360, y=460)
 
 showGraphPositionX = tk.IntVar()
 showGraphPositionX.set(1)
 CheckbuttonPositionX = tk.Checkbutton(graphWindow, text="X Position", variable=showGraphPositionX, command=refreshGraph)
-CheckbuttonPositionX.place(x=500, y=20)
+CheckbuttonPositionX.place(x=520, y=20)
 showGraphPositionY = tk.IntVar()
 showGraphPositionY.set(1)
 CheckbuttonPositionY = tk.Checkbutton(graphWindow, text="Y Position", variable=showGraphPositionY, command=refreshGraph)
-CheckbuttonPositionY.place(x=500, y=40)
+CheckbuttonPositionY.place(x=520, y=40)
 showGraphAlpha = tk.IntVar()
 CheckbuttonAlpha = tk.Checkbutton(graphWindow, text="Plate Inclination", variable=showGraphAlpha, command=refreshGraph)
-CheckbuttonAlpha.place(x=500, y=60)
+CheckbuttonAlpha.place(x=520, y=60)
+sliderRefX = tk.Scale(graphWindow, from_=0, to=480, orient="horizontal", label="RefX", length=150,
+                   tickinterval=100)
+sliderRefX.set(sliderRefXDefault)
+sliderRefX.place(x=520, y=100)
+sliderRefY = tk.Scale(graphWindow, from_=0, to=480, orient="horizontal", label="RefY", length=150,
+                   tickinterval=100)
+sliderRefY.set(sliderRefYDefault)
+sliderRefY.place(x=520, y=200)
+BsetReference = tk.Button(graphWindow, text="Set Ref", command=setRefWithButton)
+BsetReference.place(x=520, y=350)
+Blog = tk.Button(graphWindow, text="Write Log", command=startLog)
+Blog.place(x=520, y=370)
+
 
 videoWindow.protocol("WM_DELETE_WINDOW", donothing)
 videoWindow.bind("<Button-2>", getMouseClickPosition)

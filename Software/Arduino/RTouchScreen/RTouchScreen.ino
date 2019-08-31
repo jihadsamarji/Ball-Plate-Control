@@ -35,11 +35,11 @@ int readX()
    digitalWrite(X2,LOW);
    delay(10);
    X = analogRead(Y1);
-   if (X != 0)
-   {
-    X = map(X, 40, 870 , - Xresolution / 2, Xresolution / 2); //Reads X axis touch position
+   //if (X != 0)
+   //{
+   // X = map(X, 40, 870 , - Xresolution / 2, Xresolution / 2); //Reads X axis touch position
     
-   }
+   //}
    return X;
 }
 
@@ -56,16 +56,16 @@ int readY()
    digitalWrite(Y2,LOW);
    delay(10);
    Y = analogRead(X1);
-   if (Y != 0){
-    Y = map(Y, 70, 835 , - Yresolution / 2, Yresolution / 2); 
-   }
+   //if (Y != 0){
+   // Y = map(Y, 70, 835 , - Yresolution / 2, Yresolution / 2); 
+   //}
    return Y;
 }
 
 
 void setup()
 {
-   Serial.begin(9600);
+   Serial.begin(19200);
      
 
 }

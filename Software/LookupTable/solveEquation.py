@@ -37,15 +37,18 @@ max_theta = 180
 
 for alpha in range(-maxAlpha,maxAlpha+1):
     alpha = radians(alpha/10)
-    if alpha < 0 :
-            theta = arcsin(sin(alpha)*K) + pi/2
-    else :
-            theta = (arcsin(sin(alpha)*K) + pi/2)*0.995
-    alpha = round(degrees(alpha),2)
-    #theta = translate(degrees(theta),20,160,0,180)
-    theta = round(degrees(theta),0)
+    theta = arcsin(sin(alpha)*K) + pi/2
+    alpha = degrees(alpha)
+    theta = translate(degrees(theta),20,160,0,180)
+    if theta > 120 and theta < 140:
+            theta = translate(theta,120,140,120,145)
+    elif theta > 140 and theta < 160:
+            theta = translate(theta,140,160,145,150)
+    elif theta > 160 and theta < 180:
+            theta = translate(theta,160,180,150,159)
+    #theta = round(degrees(theta),0)
     separator = "|"
-    data = str(alpha) + separator + str(int(theta)) + "\n"
+    data = str(round(alpha,2)) + separator + str(int(round(theta,0))) + "\n"
     file.write(data)
 
 

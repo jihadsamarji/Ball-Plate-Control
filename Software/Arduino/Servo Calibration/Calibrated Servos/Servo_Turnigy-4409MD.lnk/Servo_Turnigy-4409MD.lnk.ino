@@ -22,9 +22,12 @@ void setup() {
   //angleB = map(angleB,20,160,0,180);
   servoA.attach(10,500,2600); 
   servoB.attach(6,500,2600);
-  servoA.write(angleA);
+  servoA.write(0);
   servoB.write(angleB);
-
+  delay(5000);
+  servoA.write(90);
+  delay(50);
+  servoA.write(180);
 
 }
 
