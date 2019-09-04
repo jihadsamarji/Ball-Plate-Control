@@ -1,10 +1,7 @@
 from numpy import *
 from math import *
 
-def arduino_map(x, in_min, in_max, out_min, out_max):
-	return (x - in_min) * (out_max - out_min) // (in_max - in_min) + out_min
-
-def translate(value, leftMin, leftMax, rightMin, rightMax):
+def translate(value, leftMin, leftMax, rightMin, rightMax):		# This function is equivalent to the map() function in arduino
     # Figure out how 'wide' each range is
     leftSpan = leftMax - leftMin
     rightSpan = rightMax - rightMin
@@ -27,10 +24,10 @@ theta = 0
 
 
 file = open("data.txt", "w") #create file 
-firstline = "alpha|theta\n"
-file.write(firstline)
+firstline = "alpha|theta\n"	# define first line used as a title
+file.write(firstline) # write first line in text file
 
-maxAlpha = 149
+maxAlpha = 14.9*10	# here is the maximum angle alpha in degrees x10 to scale it
 alpha = radians(maxAlpha/10)
 #max_theta = arcsin(sin(alpha)*K)
 max_theta = 180
@@ -40,11 +37,11 @@ for alpha in range(-maxAlpha,maxAlpha+1):
     theta = arcsin(sin(alpha)*K) + pi/2
     alpha = degrees(alpha)
     theta = translate(degrees(theta),20,160,0,180)
-    if theta > 120 and theta < 140:
+    if theta > 120 and theta < 140:						# different areas of non linearities
             theta = translate(theta,120,140,120,145)
-    elif theta > 140 and theta < 160:
+    elif theta > 140 and theta < 160:					# different areas of non linearities
             theta = translate(theta,140,160,145,150)
-    elif theta > 160 and theta < 180:
+    elif theta > 160 and theta < 180:					# different areas of non linearities
             theta = translate(theta,160,180,150,159)
     #theta = round(degrees(theta),0)
     separator = "|"

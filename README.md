@@ -2,7 +2,9 @@
 The Project is Still under Construction
 -------------------------------------
 # Ball-Plate-Control
-This is a project done for a Master Thesis in the Electromechanical Engineering (specialization: Mechatronics), it is about the design and control of a Ball and Plate Didactic Device. This device is intended to be developed into a Commercial device and maybe sold to educational institutes or young apprentices in the field of Control Systems. 
+This is a project done for a Master Thesis in the Electromechanical Engineering (specialization: Mechatronics),
+it is about the design and control of a Ball and Plate Didactic Device.
+This device is intended to be developed into a Commercial device and maybe sold to educational institutes or young apprentices in the field of Control Systems. 
 
 ## Getting Started
 
@@ -16,7 +18,7 @@ things you need to install before running the code:
 - Python PiP
 - Python IDE (Pycharm is recommended)
 
-Run the following commands in your command terminal after install "PIP"
+Run the following commands in your command terminal after installing "PIP"
 ```
 pip install opencv-python 3.4.5.20
 pip install Django
@@ -33,14 +35,14 @@ pip install wheel
 
 ## Deployment
 
-- Make sure you run the solveequation.py code first to generate the dictionary file.
-- Then place the dictionary file in the same directory of the interface.py code.
-- Connect an Arduino and upload the arduino code (Full_Program.ino) using the arduino IDE
-- Make sure you have a Camera attached on your system.
-- Run the code interface.py . 
+- Make sure you run the "solveequation.py" code first to generate the dictionary file. (found in /Software/Lookuptable/)
+- Then place the dictionary file called "data.txt" in the same directory of the "interface.py" code. (found in /Software/Interface/)
+- Connect an Arduino and upload the arduino code "Full_Program.ino" using the arduino IDE.
+- Make sure you have a Camera attached on your system. (otherwise, you will get an opencv error when running)
+- Run the code "interface.py" . (found in /Software/Interface/) 
 
 ## Simulation Files
-The simulation files are found in the (Software/Matlab & Simulation/)
+The simulation files are found in ( /Software/Matlab & Simulation/)
 
 ## Contributing
 
