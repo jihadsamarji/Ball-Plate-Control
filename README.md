@@ -71,6 +71,6 @@ The door to my supervisors was always open whenever I ran into problems or had a
 They consistently allowed this paper to be my own work, but steered me in the right direction whenever I needed it.
 I would also like to thank the members of my dissertation committee - not only for their time and extreme patience, but for their intellectual contributions to my development as an Engineer.
 In Addition, I like to express my gratitude to the open source Community that helped a lot in overcoming software and computational challenges during the study.
-I must express my very profound gratitude to my parents, friends and to my girlfriend for providing me with unfailing support and continuous encouragement throughout my study and through the process of researching and writing thisthesis.
+I must express my very profound gratitude to my parents, friends and to my girlfriend for providing me with unfailing support and continuous encouragement throughout my study and through the process of researching and writing this thesis.
 This accomplishment would not have been possible without them.
 Thank you.
