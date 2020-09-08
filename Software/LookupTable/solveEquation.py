@@ -27,7 +27,7 @@ file = open("data.txt", "w") #create file
 firstline = "alpha|theta\n"	# define first line used as a title
 file.write(firstline) # write first line in text file
 
-maxAlpha = 14.9*10	# here is the maximum angle alpha in degrees x10 to scale it
+maxAlpha = int(14.9*10)	# here is the maximum angle alpha in degrees x10 to scale it
 alpha = radians(maxAlpha/10)
 #max_theta = arcsin(sin(alpha)*K)
 max_theta = 180
