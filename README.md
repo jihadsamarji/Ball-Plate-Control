@@ -22,7 +22,7 @@ things you need to install before running the code:
 
 Run the following commands in your command terminal after installing "PIP"
 ```
-pip install opencv-python 3.4.5.20
+pip install opencv-python==3.4.5.20
 pip install Django
 pip install Pillow
 pip install image
